@@ -156,9 +156,9 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
       <a class="biz-card" href="ppc.html">
         <div class="ico">📊</div>
         <div class="bname" style="color:#6FA3E0">PPC Services</div>
-        <div class="bsub">4 Clients · Amazon PPC Management</div>
+        <div class="bsub">2 Active + 2 Pipeline · Amazon PPC Management</div>
         <div class="bamt" id="h-ppc-rev">—</div>
-        <div class="blbl">36-Mo Income (w/ Omni)</div>
+        <div class="blbl">36-Mo Income (all clients)</div>
         <div class="btn">Full Dashboard →</div>
       </a>
       <a class="biz-card" href="index.html">
@@ -196,7 +196,7 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
   <div class="sec-hd">36-Month Portfolio Summary <span class="chip">All Businesses Combined</span></div>
   <div class="alrt ora">
     <span>📌</span>
-    <div><strong>Note:</strong> Pumice Stone, Rolling Grips, and Sugar Keepers are simulated projections. Sugar Keepers based on real Year 1 SellerBoard data ($27,475 net profit) with 20% YoY growth. PPC revenue is contracted. Life expenses ($3.5K→$4.5K→$5.5K/mo) deducted from net.</div>
+    <div><strong>Note:</strong> Pumice Stone, Rolling Grips, and Sugar Keepers are simulated projections. Sugar Keepers based on real Year 1 SellerBoard data ($27,475 net profit) with 20% YoY growth. PPC: Omni ($4K) + Cooper's Cask ($2K) active now; Go Mental ($1K) + Blossom Care ($700→$1K) expected ~6 weeks out. Family expenses ($4K Aug 2026, $5K/mo from Sep) plus a one-time $3K childbirth cost in Sep 2026 deducted from net.</div>
   </div>
 </div>
 
@@ -282,15 +282,17 @@ function pumiceMonthRev(m){
 }
 
 // ── PPC SERVICES ──────────────────────────────────────────────────
+// Omni + Cooper's Cask confirmed/active now; Go Mental + Blossom Care expected ~6 wks out (pipeline)
 function ppcRev(m){
-  const coopers=2000,goMental=1000;
+  const omni=4000,coopers=2000,goMental=1000;
   const blossom=m===0?700:m===1?800:1000;
-  const omni=3000;
-  return {confirmed:coopers+goMental+blossom, withOmni:coopers+goMental+blossom+omni};
+  const confirmed=omni+coopers;
+  return {confirmed, withOmni:confirmed+goMental+blossom};
 }
 
 // ── LIFE EXPENSES ─────────────────────────────────────────────────
-function lifeExp(m){ return m<5?3500:m<17?4500:5500; }
+function lifeExp(m){ return m===0?4000:5000; } // Aug 2026 $4K, Sep 2026+ $5K
+function oneTimeExp(m){ return m===1?3000:0; } // childbirth cost, Sep 2026
 
 // ── ROLLING GRIPS ─────────────────────────────────────────────────
 // KS Dec 2026 (m=4), Amazon launch Mar 2027 (m=7 = 4+3 months for fulfillment+FBA)
@@ -336,8 +338,8 @@ const ksIncome=new Array(36).fill(0); ksIncome[4]=66500;
 const skRows=window._skRows;
 const skRev=skRows.map(r=>r.rev);
 const skPrf=skRows.map(r=>r.prf);
-const expenses=months.map(lifeExp);
-const totalPrfOmni=months.map(m=>pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]-lifeExp(m));
+const expenses=months.map(m=>lifeExp(m)+oneTimeExp(m));
+const totalPrfOmni=months.map(m=>pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]-expenses[m]);
 
 const periods=[[0,5],[5,17],[17,29],[29,36]];
 function sumPeriod(arr,p){return arr.slice(p[0],p[1]).reduce((a,v)=>a+v,0);}
@@ -369,7 +371,7 @@ document.getElementById('h-sk-rev').textContent='$'+Math.round(totSkPrf/1000)+'K
 // ── PORTFOLIO KPIs ─────────────────────────────────────────────────
 const kpis=[
   {l:'Total 36-Mo Revenue',     v:$f(totPumRev+totPpcRev+totRgRev+totSkRev), s:'All 4 businesses',          c:'var(--gold)'},
-  {l:'Life Expenses 36-Mo',     v:$f(totExp),                                  s:'$3.5K→$4.5K→$5.5K/mo',    c:'var(--red)'},
+  {l:'Life Expenses 36-Mo',     v:$f(totExp),                                  s:'$4K Aug\'26 → $5K/mo + $3K one-time', c:'var(--red)'},
   {l:'36-Mo Net (all biz)',      v:$fs(totNet),                                 s:'after expenses',            c:totNet>0?'var(--grn)':'var(--red)'},
   {l:'Peak Monthly (Combined)',  v:$f(Math.max(...totalPrfOmni)),               s:MFL[totalPrfOmni.indexOf(Math.max(...totalPrfOmni))], c:'var(--grn)'},
   {l:'Break-Even Month',        v:(()=>{let c=0;for(let m=0;m<36;m++){c+=totalPrfOmni[m];if(c>0)return MFL[m];}return '36+mo';})(), s:'cumulative net turns positive', c:'var(--pur)'},
@@ -386,7 +388,7 @@ const tbody=document.getElementById('sumBody');
 const tableRows=[
   {label:'🪨 Pumice Stone Revenue',  rev:pumRevPer, tot:totPumRev, c:'var(--c-pumice)', sub:false},
   {label:'  └ Net Profit',           rev:pumPrfPer, tot:totPumPrf, c:'var(--grn)',       sub:true},
-  {label:'📊 PPC Services (w/ Omni)',rev:ppcRevPer, tot:totPpcRev, c:'var(--c-ppc)',     sub:false},
+  {label:'📊 PPC Services (all clients)',rev:ppcRevPer, tot:totPpcRev, c:'var(--c-ppc)',     sub:false},
   {label:'💪 Rolling Grips Revenue', rev:rgRevPer,  tot:totRgRev,  c:'var(--c-rg)',      sub:false},
   {label:'  └ Net Profit',           rev:rgPrfPer,  tot:totRgPrf,  c:'var(--grn)',       sub:true},
   {label:'🍬 Sugar Keepers Revenue', rev:skRevPer,  tot:totSkRev,  c:'var(--c-sk)',      sub:false},
@@ -408,7 +410,7 @@ new Chart(document.getElementById('combinedChart').getContext('2d'),{
   type:'bar',
   data:{labels:MFL, datasets:[
     {label:'Pumice Net Profit',     data:pumicePrf,          backgroundColor:'rgba(196,98,45,.55)',  stack:'s'},
-    {label:'PPC Revenue (w/ Omni)', data:ppcRevOmni,         backgroundColor:'rgba(46,111,219,.55)', stack:'s'},
+    {label:'PPC Revenue (all clients)', data:ppcRevOmni,         backgroundColor:'rgba(46,111,219,.55)', stack:'s'},
     {label:'Rolling Grips Profit',  data:rgPrf,              backgroundColor:'rgba(139,181,0,.55)',  stack:'s'},
     {label:'Sugar Keepers Profit',  data:skPrf,              backgroundColor:'rgba(200,119,34,.55)', stack:'s'},
     {label:'Life Expenses',         data:expenses.map(v=>-v),backgroundColor:'rgba(192,57,43,.35)',  stack:'s'},
@@ -422,7 +424,7 @@ new Chart(document.getElementById('combinedChart').getContext('2d'),{
 new Chart(document.getElementById('lifeChart').getContext('2d'),{
   type:'line',
   data:{labels:MFL, datasets:[
-    {label:'PPC Revenue (w/ Omni)', data:ppcRevOmni,   backgroundColor:'rgba(46,111,219,.12)',borderColor:'#2E6FDB',fill:true,tension:.3,pointRadius:2},
+    {label:'PPC Revenue (all clients)', data:ppcRevOmni,   backgroundColor:'rgba(46,111,219,.12)',borderColor:'#2E6FDB',fill:true,tension:.3,pointRadius:2},
     {label:'PPC Confirmed only',    data:ppcRevConf,   borderColor:'rgba(46,111,219,.4)',fill:false,tension:.3,pointRadius:0,borderDash:[4,3]},
     {label:'Life Expenses',         data:expenses,     backgroundColor:'rgba(192,57,43,.08)',borderColor:'#C0392B',fill:true,tension:.0,pointRadius:2},
   ]},

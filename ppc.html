@@ -100,7 +100,7 @@ tr.tot td{background:#1C2A4A!important;color:#fff!important;font-weight:700;}
     <p>Client Revenue Forecast · Aug 2026 – Jul 2029 · 36 Months</p>
   </div>
   <div class="hdr-r">
-    <div class="lbl">Confirmed MRR (Month 3+)</div>
+    <div class="lbl">Confirmed MRR (Active Now)</div>
     <div class="big" id="hMRR">—</div>
     <div class="lbl">36-Mo Confirmed · <span style="color:var(--gold)" id="hTotal">—</span></div>
   </div>
@@ -109,37 +109,56 @@ tr.tot td{background:#1C2A4A!important;color:#fff!important;font-weight:700;}
 <div class="kpis" id="kpiRow"></div>
 
 <div class="sec">
-  <div class="sec-hd">Clients <span class="chip">3 Active</span><span class="chip pot">1 Potential</span></div>
+  <div class="sec-hd">Clients <span class="chip">2 Active</span><span class="chip pot">2 Pipeline (~6 wks out)</span></div>
   <div class="clients-grid">
+
+    <div class="cc" style="border-color:var(--omni)">
+      <div class="cn" style="color:var(--omni)">Omni</div>
+      <div class="rate" style="color:var(--omni)">$4,000<span style="font-size:13px;font-weight:400;color:var(--mut)">/mo</span></div>
+      <div class="detail">Fixed retainer · No ramp<br>Active now · 36-Mo: $144,000</div>
+      <span class="badge active">Active</span>
+    </div>
 
     <div class="cc" style="border-color:var(--coop)">
       <div class="cn" style="color:var(--coop)">Cooper's Cask Coffee</div>
       <div class="rate" style="color:var(--coop)">$2,000<span style="font-size:13px;font-weight:400;color:var(--mut)">/mo</span></div>
-      <div class="detail">Fixed retainer · No ramp<br>Active from Aug 2026 · 36-Mo: $72,000</div>
+      <div class="detail">Fixed retainer · No ramp<br>Active now · 36-Mo: $72,000</div>
       <span class="badge active">Active</span>
     </div>
 
-    <div class="cc" style="border-color:var(--gom)">
+    <div class="cc potential" style="border-color:var(--gom)">
       <div class="cn" style="color:var(--gom)">Go Mental</div>
       <div class="rate" style="color:var(--gom)">$1,000<span style="font-size:13px;font-weight:400;color:var(--mut)">/mo</span></div>
-      <div class="detail">Fixed retainer · No ramp<br>Started Jul 25, 2026 · 36-Mo: $36,000</div>
-      <span class="badge active">Active</span>
+      <div class="detail">Fixed retainer · No ramp<br>Expected start: ~6 weeks out (mid-Aug 2026) · 36-Mo: $36,000</div>
+      <span class="badge pot">Pipeline</span>
     </div>
 
-    <div class="cc" style="border-color:var(--bls)">
+    <div class="cc potential" style="border-color:var(--bls)">
       <div class="cn" style="color:var(--bls)">Blossom Care</div>
       <div class="rate" style="color:var(--bls)">$700 → $800 → $1,000<span style="font-size:11px;font-weight:400;color:var(--mut)">/mo</span></div>
-      <div class="detail">Month 1: $700 · Month 2: $800 · Month 3+: $1,000<br>Started Aug 11, 2026 · 36-Mo: $35,500</div>
-      <span class="badge active">Active</span>
+      <div class="detail">Month 1: $700 · Month 2: $800 · Month 3+: $1,000<br>Expected start: ~6 weeks out (mid-Aug 2026) · 36-Mo: $35,500</div>
+      <span class="badge pot">Pipeline</span>
     </div>
 
-    <div class="cc potential" style="border-color:var(--omni)">
-      <div class="cn" style="color:#9A7420">Omni</div>
-      <div class="rate" style="color:var(--gold)">$3,000<span style="font-size:13px;font-weight:400;color:var(--mut)">/mo</span></div>
-      <div class="detail">Fixed retainer · No ramp<br>Potential start: Aug 11, 2026 · 36-Mo: $108,000</div>
-      <span class="badge pot">Potential</span>
-    </div>
+  </div>
+</div>
 
+<div class="sec" style="padding-bottom:12px">
+  <div class="sec-hd">Next 12 Months — Personal Cash Flow <span class="chip">No client churn assumed</span></div>
+  <div class="tbl-wrap" style="margin-bottom:0">
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:left">Month</th>
+          <th style="background:#1C2A4A">PPC Income</th>
+          <th style="background:#4A1A1A">Family Expenses</th>
+          <th style="background:#4A1A1A">One-Time</th>
+          <th style="background:#0A2A1A">Profit</th>
+          <th style="background:#0A3A1A">Cumulative</th>
+        </tr>
+      </thead>
+      <tbody id="tbl12Body"></tbody>
+    </table>
   </div>
 </div>
 
@@ -149,10 +168,10 @@ tr.tot td{background:#1C2A4A!important;color:#fff!important;font-weight:700;}
     <h3>
       Monthly Client Revenue
       <div class="leg">
+        <div class="leg-i"><div class="leg-dot" style="background:var(--omni)"></div>Omni</div>
         <div class="leg-i"><div class="leg-dot" style="background:var(--coop)"></div>Cooper's Cask</div>
-        <div class="leg-i"><div class="leg-dot" style="background:var(--gom)"></div>Go Mental</div>
-        <div class="leg-i"><div class="leg-dot" style="background:var(--bls)"></div>Blossom Care</div>
-        <div class="leg-i"><div class="leg-dot" style="background:var(--omni);opacity:.6"></div>Omni (potential)</div>
+        <div class="leg-i"><div class="leg-dot" style="background:var(--gom);opacity:.6"></div>Go Mental (pipeline)</div>
+        <div class="leg-i"><div class="leg-dot" style="background:var(--bls);opacity:.6"></div>Blossom Care (pipeline)</div>
       </div>
     </h3>
     <div class="cw"><canvas id="revChart"></canvas></div>
@@ -170,15 +189,15 @@ tr.tot td{background:#1C2A4A!important;color:#fff!important;font-weight:700;}
         <thead>
           <tr>
             <th style="text-align:left">Month</th>
+            <th style="background:#7A5E10">Omni</th>
             <th style="background:#6B3010">Cooper's Cask</th>
-            <th style="background:#1A3A7A">Go Mental</th>
-            <th style="background:#7A0040">Blossom Care</th>
-            <th style="background:#7A5E10">Omni ✦</th>
+            <th style="background:#1A3A7A">Go Mental ✦</th>
+            <th style="background:#7A0040">Blossom Care ✦</th>
             <th style="background:#1C2A4A">Confirmed</th>
-            <th style="background:#3A2A10">With Omni</th>
-            <th style="background:#4A1A1A">Life Expenses</th>
+            <th style="background:#3A2A10">With Pipeline</th>
+            <th style="background:#4A1A1A">Expenses</th>
             <th style="background:#0A2A1A">Net (Confirmed)</th>
-            <th style="background:#0A3A1A">Net (w/ Omni)</th>
+            <th style="background:#0A3A1A">Net (w/ Pipeline)</th>
           </tr>
         </thead>
         <tbody id="tblBody"></tbody>
@@ -193,21 +212,23 @@ tr.tot td{background:#1C2A4A!important;color:#fff!important;font-weight:700;}
 const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027','Nov 2027','Dec 2027','Jan 2028','Feb 2028','Mar 2028','Apr 2028','May 2028','Jun 2028','Jul 2028','Aug 2028','Sep 2028','Oct 2028','Nov 2028','Dec 2028','Jan 2029','Feb 2029','Mar 2029','Apr 2029','May 2029','Jun 2029','Jul 2029'];
 
 function lifeExp(m){
-  if(m<5)  return 3500; // Aug–Dec 2026
-  if(m<17) return 4500; // Jan–Dec 2027
-  return 5500;           // Jan 2028+
+  return m===0 ? 4000 : 5000; // Aug 2026 = $4K, Sep 2026 on = $5K
+}
+function oneTime(m){
+  return m===1 ? 3000 : 0; // childbirth cost, Sep 2026
 }
 
 function rev(m){
+  const omni     = 4000;
   const coopers  = 2000;
   const goMental = 1000;
   const blossom  = m===0 ? 700 : m===1 ? 800 : 1000;
-  const omni     = 3000;
-  const confirmed = coopers + goMental + blossom;
-  const exp = lifeExp(m);
-  return {coopers, goMental, blossom, omni, confirmed,
-          withOmni: confirmed + omni, exp,
-          netConf: confirmed - exp, netOmni: confirmed + omni - exp};
+  const confirmed = omni + coopers;      // active now, guaranteed
+  const pipeline  = goMental + blossom;  // expected in ~6 weeks
+  const exp = lifeExp(m) + oneTime(m);
+  return {omni, coopers, goMental, blossom, confirmed,
+          withOmni: confirmed + pipeline, exp,
+          netConf: confirmed - exp, netOmni: confirmed + pipeline - exp};
 }
 
 const $f  = v => '$'+Math.round(v).toLocaleString();
@@ -244,11 +265,11 @@ const netConf36 = cumConf - cumExp;
 const netOmni36 = cumOmni - cumExp;
 // KPI cards
 const kpis=[
-  {l:'Active Clients',        v:'3',                    s:'+ 1 potential (Omni)',              c:'#2E6FDB'},
-  {l:'Life Expenses 36-Mo',   v:$f(cumExp),             s:'$3.5K→$4.5K→$5.5K/mo',            c:'var(--red)'},
+  {l:'Active Clients',        v:'2',                    s:'+ 2 pipeline (~6 wks out)',         c:'#2E6FDB'},
+  {l:'Family Expenses 36-Mo', v:$f(cumExp),             s:'$4K Aug\'26 → $5K/mo + $3K one-time', c:'var(--red)'},
   {l:'36-Mo Revenue (Conf.)', v:$f(cumConf),            s:'Aug 2026 – Jul 2029',               c:'var(--grn)'},
-  {l:'Net 36-Mo (Confirmed)', v:$fc(netConf36),         s: netConf36<0?'Need Omni or new client':'Surplus after expenses', c: netConf36<0?'var(--red)':'var(--grn)'},
-  {l:'Net 36-Mo (With Omni)', v:$fc(netOmni36),         s:'Omni covers all expenses + profit', c:'var(--gold)'},
+  {l:'Net 36-Mo (Confirmed)', v:$fc(netConf36),         s: netConf36<0?'Need pipeline to cover':'Surplus after expenses', c: netConf36<0?'var(--red)':'var(--grn)'},
+  {l:'Net 36-Mo (w/ Pipeline)', v:$fc(netOmni36),       s:'All 4 clients, no churn assumed',   c:'var(--gold)'},
 ];
 const kr=document.getElementById('kpiRow');
 kpis.forEach(k=>{
@@ -266,10 +287,10 @@ for(let m=0;m<36;m++){
   const tr=document.createElement('tr');
   tr.innerHTML=`
     <td>${MFL[m]}</td>
+    <td style="color:#9A7420;font-weight:600">${$f(r.omni)}</td>
     <td style="color:var(--coop);font-weight:600">${$f(r.coopers)}</td>
     <td style="color:var(--gom);font-weight:600">${$f(r.goMental)}</td>
     <td style="color:var(--bls);font-weight:600">${$f(r.blossom)}</td>
-    <td style="color:#9A7420;font-weight:600">${$f(r.omni)}</td>
     <td style="font-weight:700">${$f(r.confirmed)}</td>
     <td style="color:var(--gold);font-weight:700">${$f(r.withOmni)}</td>
     <td style="color:var(--red);font-weight:600">−${$f(r.exp)}</td>
@@ -283,10 +304,10 @@ const tot=document.createElement('tr');
 tot.className='tot';
 tot.innerHTML=`
   <td>TOTAL 36 MO</td>
+  <td style="color:var(--gold)">${$f(totO)}</td>
   <td style="color:#C89060">${$f(totC)}</td>
   <td style="color:#6FA3E0">${$f(totG)}</td>
   <td style="color:#E080A8">${$f(totB)}</td>
-  <td style="color:var(--gold)">${$f(totO)}</td>
   <td>${$f(cumConf)}</td>
   <td style="color:var(--gold)">${$f(cumOmni)}</td>
   <td style="color:#E08080">−${$f(totExp)}</td>
@@ -295,6 +316,32 @@ tot.innerHTML=`
 `;
 tbody.appendChild(tot);
 
+// 12-Month Personal Cash Flow (assumes all 4 clients active, no churn)
+(function build12mo(){
+  const body=document.getElementById('tbl12Body');
+  let cum=0;
+  for(let m=0;m<12;m++){
+    const r=rev(m);
+    const base=lifeExp(m), ot=oneTime(m);
+    const income=r.withOmni;
+    const profit=income-base-ot;
+    cum+=profit;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${MFL[m]}</td>
+      <td style="color:var(--gold);font-weight:700">${$f(income)}</td>
+      <td style="color:var(--red);font-weight:600">−${$f(base)}</td>
+      <td style="color:var(--red);font-weight:600">${ot>0?'−'+$f(ot):'—'}</td>
+      <td style="font-weight:700;color:${profit>=0?'var(--grn)':'var(--red)'}">${$fc(profit)}</td>
+      <td style="font-weight:700;color:${cum>=0?'var(--grn)':'var(--red)'}">${$fc(cum)}</td>
+    `;
+    body.appendChild(tr);
+  }
+  const tot12=document.createElement('tr'); tot12.className='tot';
+  tot12.innerHTML=`<td>TOTAL 12 MO</td><td colspan="4"></td><td>${$fc(cum)}</td>`;
+  body.appendChild(tot12);
+})();
+
 // Chart
 const ctx=document.getElementById('revChart').getContext('2d');
 new Chart(ctx,{
@@ -302,10 +349,10 @@ new Chart(ctx,{
   data:{
     labels:MFL,
     datasets:[
-      {label:"Cooper's Cask", data:mCoop, backgroundColor:'rgba(139,69,19,.75)', stack:'s'},
-      {label:'Go Mental',     data:mGom,  backgroundColor:'rgba(46,111,219,.75)', stack:'s'},
-      {label:'Blossom Care',  data:mBls,  backgroundColor:'rgba(194,24,91,.75)',  stack:'s'},
-      {label:'Omni (potential)', data:mOmni, backgroundColor:'rgba(212,168,67,.30)', borderColor:'rgba(212,168,67,.6)', borderWidth:1, borderDash:[4,3], stack:'s'},
+      {label:'Omni',           data:mOmni, backgroundColor:'rgba(212,168,67,.75)', stack:'s'},
+      {label:"Cooper's Cask",  data:mCoop, backgroundColor:'rgba(139,69,19,.75)', stack:'s'},
+      {label:'Go Mental (pipeline)',    data:mGom,  backgroundColor:'rgba(46,111,219,.35)', borderColor:'rgba(46,111,219,.6)', borderWidth:1, borderDash:[4,3], stack:'s'},
+      {label:'Blossom Care (pipeline)', data:mBls,  backgroundColor:'rgba(194,24,91,.35)',  borderColor:'rgba(194,24,91,.6)', borderWidth:1, borderDash:[4,3], stack:'s'},
     ]
   },
   options:{
