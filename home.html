@@ -7,132 +7,38 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --gold:#D4A843;--grn:#2E8B57;--red:#C0392B;--ora:#E67E22;--pur:#8E44AD;
+  --gold:#D4A843;--grn:#2E8B57;--red:#C0392B;
   --bg:#F7F3EE;--card:#fff;--bdr:#E0D5C8;
   --txt:#2A2A2A;--mut:#6B6B6B;--nav:#1C1410;
-  --c-pumice:#C4622D;--c-ppc:#2E6FDB;--c-rg:#8BB500;--c-sk:#C87722;
-  --amber:#C87722;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:13px;}
-
 nav{position:sticky;top:0;z-index:999;background:var(--nav);display:flex;padding:0 24px;overflow-x:auto;scrollbar-width:none;}
 nav::-webkit-scrollbar{display:none;}
 nav a{color:rgba(255,255,255,.55);text-decoration:none;padding:10px 13px;font-size:11px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.4px;}
 nav a:hover,nav a.act{color:#fff;border-bottom-color:var(--gold);}
 .nav-brand{color:rgba(255,255,255,.35);padding:10px 13px 10px 0;font-size:11px;font-weight:700;letter-spacing:.5px;margin-right:8px;border-right:1px solid rgba(255,255,255,.1);}
-
-/* ── HERO ── */
-.hdr{background:linear-gradient(135deg,#1C1410 0%,#2A2010 55%,#3D2A08 100%);color:#fff;padding:28px;position:relative;overflow:hidden;text-align:center;}
-.hdr::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(212,168,67,.12),transparent 65%);}
-.hdr-inner{position:relative;}
-.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;}
+.hdr{background:linear-gradient(135deg,#1C1410 0%,#2A2010 55%,#3D2A08 100%);color:#fff;padding:24px 28px;}
+.hdr h1{font-size:24px;font-weight:800;}
 .hdr h1 span{color:var(--gold);}
-.hdr p{font-size:12px;opacity:.6;margin-bottom:20px;}
-.biz-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1000px;margin:0 auto;}
-@media(max-width:800px){.biz-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:480px){.biz-grid{grid-template-columns:1fr;}}
-.biz-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:18px 15px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;display:block;color:#fff;}
-.biz-card:first-child{border-radius:12px 0 0 12px;}
-.biz-card:last-child{border-radius:0 12px 12px 0;}
-.biz-card:hover{background:rgba(255,255,255,.13);transform:translateY(-2px);}
-.biz-card .ico{font-size:26px;margin-bottom:7px;}
-.biz-card .bname{font-size:12.5px;font-weight:800;margin-bottom:3px;}
-.biz-card .bsub{font-size:10px;opacity:.5;margin-bottom:10px;}
-.biz-card .bamt{font-size:20px;font-weight:800;}
-.biz-card .blbl{font-size:10px;opacity:.5;margin-top:2px;}
-.biz-card .btn{display:inline-block;margin-top:10px;background:rgba(255,255,255,.12);padding:4px 14px;border-radius:20px;font-size:10.5px;font-weight:700;transition:background .2s;}
-.biz-card:hover .btn{background:rgba(255,255,255,.22);}
-
-/* ── KPIs ── */
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px 24px 0;}
-@media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr);}}
-.kpi{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;padding:11px 13px;text-align:center;}
-.kpi .v{font-size:18px;font-weight:800;margin:3px 0 2px;}
-.kpi .l{font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut);font-weight:600;}
-.kpi .s{font-size:10px;color:var(--mut);}
-
-/* ── LAYOUT ── */
-.sec{padding:14px 24px 0;}
-.sec-hd{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.chip{background:var(--nav);color:var(--gold);font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;}
-.chip.grn{background:var(--grn);color:#fff;}
-.chip.ora{background:var(--ora);color:#fff;}
-.alrt{border-radius:8px;padding:9px 13px;font-size:11.5px;display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;}
-.alrt.grn{background:#EEF8F2;border:1.5px solid #A8D5B8;}
-.alrt.ora{background:#FEF3E8;border:1.5px solid #F5C896;}
-
-/* ── SUMMARY TABLE ── */
-.sum-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;overflow:hidden;margin-bottom:14px;}
-table.sum{width:100%;border-collapse:collapse;font-size:11.5px;}
-table.sum th{background:var(--nav);color:#fff;padding:8px 12px;text-align:right;font-size:10px;font-weight:600;white-space:nowrap;}
-table.sum th:first-child{text-align:left;}
-table.sum td{padding:8px 12px;border-bottom:1px solid var(--bdr);text-align:right;}
-table.sum td:first-child{text-align:left;font-weight:700;}
-table.sum tr:last-child td{border:none;}
-table.sum tr.sub td{background:#F9F6F2;font-weight:500;}
-table.sum tr.hi td{background:#1C1410;color:#fff;font-weight:800;font-size:12px;}
-
-/* ── CHARTS ── */
-.chart-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;padding:14px;margin-bottom:14px;}
-.chart-wrap h3{font-size:12px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;}
+.hdr p{font-size:12px;opacity:.65;margin-top:4px;}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 24px 0;}
+@media(max-width:700px){.kpis{grid-template-columns:1fr;}}
+.kpi{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;padding:12px 14px;text-align:center;}
+.kpi .v{font-size:20px;font-weight:800;margin:3px 0 2px;}
+.kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);font-weight:600;}
+.sec{padding:16px 24px 0;}
+.sec-hd{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);font-weight:700;margin-bottom:10px;}
+.chart-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;padding:14px;margin-bottom:16px;}
 .cw{position:relative;height:260px;}
-.cw-sm{position:relative;height:210px;}
-.two-c{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-@media(max-width:700px){.two-c{grid-template-columns:1fr;}}
-
-/* ── SECTION DIVIDER ── */
-.biz-section{border-top:3px solid var(--bdr);margin-top:6px;padding-top:4px;}
-.biz-section-hdr{display:flex;align-items:center;gap:10px;padding:14px 24px 0;}
-.biz-section-hdr .ico{font-size:22px;}
-.biz-section-hdr h2{font-size:14px;font-weight:800;}
-.biz-section-hdr .sub{font-size:11px;color:var(--mut);margin-top:1px;}
-.biz-section-hdr .tag{margin-left:auto;font-size:10px;background:var(--bg);border:1.5px solid var(--bdr);border-radius:6px;padding:3px 10px;color:var(--mut);font-weight:600;}
-
-/* ── SK ASIN CARDS ── */
-.asin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px;margin-bottom:12px;}
-.ac{background:var(--card);border:1.5px solid var(--bdr);border-radius:8px;padding:10px 13px;border-left:3px solid var(--amber);}
-.ac .name{font-size:11px;font-weight:700;margin-bottom:3px;color:#5A2D0C;}
-.ac .asin-id{font-size:9.5px;color:var(--mut);margin-bottom:6px;}
-.ac .row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;border-bottom:1px solid var(--bg);}
-.ac .row:last-child{border:none;}
-.ac .row span:last-child{font-weight:700;}
-
-/* ── SK INVENTORY ── */
-.inv-callout{background:linear-gradient(135deg,#FEF3E8,#FDEBD0);border:2px solid var(--amber);border-radius:10px;padding:13px 16px;margin-bottom:10px;}
-.inv-callout h3{font-size:12px;font-weight:800;color:#5A2D0C;margin-bottom:8px;}
-.inv-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:7px;}
-.inv-item{background:#fff;border:1px solid var(--bdr);border-radius:7px;padding:7px 10px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;}
-.inv-item .qty{font-size:17px;font-weight:800;color:#5A2D0C;}
-
-/* ── SK Y1 STATS ── */
-.y1-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
-@media(max-width:700px){.y1-grid{grid-template-columns:repeat(2,1fr);}}
-.y1c{background:var(--card);border:1.5px solid var(--bdr);border-radius:8px;padding:10px 13px;border-left:3px solid var(--amber);}
-.y1c .n{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;}
-.y1c .v{font-size:16px;font-weight:800;}
-.y1c .s{font-size:10px;color:var(--mut);margin-top:2px;}
-
-/* ── MONTHLY TABLE ── */
-.tbl-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;overflow:hidden;margin-bottom:22px;}
-.tbl-toggle{width:100%;padding:11px 15px;background:var(--nav);color:#fff;font-size:11.5px;font-weight:700;cursor:pointer;border:none;text-align:left;display:flex;justify-content:space-between;align-items:center;}
-.arr{transition:transform .25s;}
-.tbl-toggle.op .arr{transform:rotate(180deg);}
-.tbl-inner{display:none;overflow-x:auto;}
-.tbl-inner.op{display:block;}
-table.detail{width:100%;border-collapse:collapse;font-size:11px;}
-table.detail th{background:var(--nav);color:#fff;padding:6px 9px;text-align:center;font-size:10px;font-weight:600;white-space:nowrap;}
-table.detail th:first-child{text-align:left;min-width:85px;}
-table.detail td{padding:5px 8px;border-bottom:1px solid var(--bdr);text-align:center;white-space:nowrap;}
-table.detail td:first-child{text-align:left;font-weight:600;font-size:10.5px;color:var(--mut);}
-table.detail tr:hover td{background:#FAF0E6;}
-table.detail tr.pk td{background:#FFF3E8!important;}
-table.detail tr.tot td{background:var(--nav)!important;color:#fff!important;font-weight:700;}
-table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
-
-.pos{color:var(--grn);font-weight:700;}
-.neg{color:var(--red);font-weight:700;}
-
+.tbl-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;overflow-x:auto;margin-bottom:24px;}
+table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap;}
+th{background:var(--nav);color:#fff;padding:7px 10px;text-align:right;font-size:10px;font-weight:600;}
+th:first-child{text-align:left;}
+td{padding:6px 10px;border-bottom:1px solid var(--bdr);text-align:right;}
+td:first-child{text-align:left;font-weight:600;color:var(--mut);}
+tr:hover td{background:#FAF6F0;}
+tr.tot td{background:var(--nav);color:#fff;font-weight:700;}
 .foot{background:var(--nav);color:rgba(255,255,255,.4);text-align:center;padding:10px;font-size:10px;margin-top:8px;}
 </style>
 </head>
@@ -141,450 +47,126 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
 <nav>
   <span class="nav-brand">ACTIVE BUSINESSES</span>
   <a href="home.html" class="act">🏠 Overview</a>
-  <a href="index.html">🪨 Pumice Stone</a>
   <a href="ppc.html">📊 PPC Services</a>
-  <a href="rolling-grips.html">💪 Rolling Grips</a>
   <a href="sugar-keepers.html">🍬 Sugar Keepers</a>
+  <a href="index.html">🪨 Pumice Stone</a>
+  <a href="rolling-grips.html">💪 Rolling Grips</a>
 </nav>
 
-<!-- HERO -->
 <div class="hdr">
-  <div class="hdr-inner">
-    <h1>Levan Rurua — <span>Active Businesses</span></h1>
-    <p>12-Month Portfolio Overview · Aug 2026 – Jul 2027 · Phuket, Thailand</p>
-    <div class="biz-grid">
-      <a class="biz-card" href="ppc.html">
-        <div class="ico">📊</div>
-        <div class="bname" style="color:#6FA3E0">PPC Services</div>
-        <div class="bsub">2 Active + 2 Pipeline · Amazon PPC Management</div>
-        <div class="bamt" id="h-ppc-rev">—</div>
-        <div class="blbl">12-Mo Income (all clients)</div>
-        <div class="btn">Full Dashboard →</div>
-      </a>
-      <a class="biz-card" href="sugar-keepers.html">
-        <div class="ico">🍬</div>
-        <div class="bname" style="color:#F5C896">Sugar Keepers</div>
-        <div class="bsub">Sifri Art · 7 ASINs · Bear Flagship</div>
-        <div class="bamt" id="h-sk-rev">—</div>
-        <div class="blbl">12-Mo Net Profit (forecast)</div>
-        <div class="btn">Full Dashboard →</div>
-      </a>
-      <a class="biz-card" href="index.html">
-        <div class="ico">🪨</div>
-        <div class="bname" style="color:#F2A87E">Pumice Stone</div>
-        <div class="bsub">Sifri Art · Amazon FBA · 3 SKUs</div>
-        <div class="bamt" id="h-pumice-rev">—</div>
-        <div class="blbl">12-Mo Net Profit</div>
-        <div class="btn">Full Dashboard →</div>
-      </a>
-      <a class="biz-card" href="rolling-grips.html">
-        <div class="ico">💪</div>
-        <div class="bname" style="color:#C8FF00">Rolling Grips</div>
-        <div class="bsub">Kickstarter Launch · Amazon FBA</div>
-        <div class="bamt" id="h-rg-rev">—</div>
-        <div class="blbl">12-Mo Net Profit</div>
-        <div class="btn">Full Dashboard →</div>
-      </a>
-    </div>
-  </div>
+  <h1>Levan Rurua — <span>Active Businesses</span></h1>
+  <p>Monthly Ledger · Jul 2026 – Mar 2029 · Phuket, Thailand</p>
 </div>
 
 <div class="kpis" id="kpiRow"></div>
 
-<!-- PORTFOLIO SUMMARY -->
-<div class="sec" style="padding-bottom:4px">
-  <div class="sec-hd">12-Month Portfolio Summary <span class="chip">All Businesses Combined</span></div>
-  <div class="alrt ora">
-    <span>📌</span>
-    <div><strong>Note:</strong> Pumice Stone, Rolling Grips, and Sugar Keepers are simulated projections. Sugar Keepers based on real Year 1 SellerBoard data ($27,475 net profit) with 20% YoY growth. PPC: Omni ($4K) + Cooper's Cask ($2K) active now; Go Mental ($1K) + Blossom Care ($700→$1K) expected ~6 weeks out. Family expenses ($4K Aug 2026, $5K/mo from Sep) plus a one-time $3K childbirth cost in Sep 2026 deducted from net.</div>
-  </div>
-</div>
-
-<div class="sec" style="padding-bottom:12px">
-  <div class="sum-wrap">
-    <table class="sum">
-      <thead>
-        <tr>
-          <th style="text-align:left">Business / Category</th>
-          <th>12-Mo Total</th>
-        </tr>
-      </thead>
-      <tbody id="sumBody"></tbody>
+<div class="sec">
+  <div class="sec-hd">Full Monthly Ledger — All Income &amp; Expenses</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr id="thRow"></tr></thead>
+      <tbody id="tblBody"></tbody>
     </table>
   </div>
 </div>
 
 <div class="sec" style="padding-bottom:14px">
   <div class="chart-wrap">
-    <h3>Monthly Net Profit — All Businesses Combined</h3>
-    <div class="cw"><canvas id="combinedChart"></canvas></div>
-  </div>
-  <div class="chart-wrap">
-    <h3>Monthly PPC Income vs Life Expenses</h3>
-    <div class="cw"><canvas id="lifeChart"></canvas></div>
-  </div>
-  <div class="chart-wrap">
-    <h3>Cumulative Net Profit — Portfolio <span style="font-size:10px;color:var(--mut);font-weight:400">after expenses &amp; reorders</span></h3>
-    <div class="cw"><canvas id="cumChart"></canvas></div>
-  </div>
-
-  <!-- MONTHLY INCOME / EXPENSES BREAKDOWN TABLE -->
-  <div class="tbl-wrap" style="margin-bottom:0">
-    <button class="tbl-toggle op" onclick="this.classList.toggle('op');document.getElementById('momInner').classList.toggle('op')">
-      <span>📅 Month-by-Month Income &amp; Expenses — All Businesses</span>
-      <span class="arr">▼</span>
-    </button>
-    <div class="tbl-inner op" id="momInner">
-      <table class="detail">
-        <thead>
-          <tr>
-            <th style="text-align:left;min-width:85px">Month</th>
-            <th style="background:#5A2D0C">🪨 Pumice</th>
-            <th style="background:#0D1B2A">📊 PPC</th>
-            <th style="background:#1A3A00">💪 Rolling Grips</th>
-            <th style="background:#5C3A1A">🍬 Sugar</th>
-            <th style="background:#2A1A00">Total Income</th>
-            <th style="background:#4A0000">🏠 Expenses</th>
-            <th style="background:#3A1A1A">📦 Reorders</th>
-            <th style="background:#1A1A2A">Cash Net</th>
-            <th style="background:#0A1A0A">Cumulative</th>
-          </tr>
-        </thead>
-        <tbody id="momBody"></tbody>
-      </table>
-    </div>
+    <div style="font-weight:700;font-size:12px;margin-bottom:8px">Balance Over Time</div>
+    <div class="cw"><canvas id="balChart"></canvas></div>
   </div>
 </div>
 
-
-<div class="foot">Active Businesses Dashboard · Levan Rurua · Aug 2026 – Jul 2027</div>
+<div class="foot">Active Businesses Dashboard · Levan Rurua · Jul 2026 – Mar 2029</div>
 
 <script>
-const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027'];
-const $f  = v => '$'+Math.round(Math.abs(v)).toLocaleString();
-const $fs = v => (v<0?'−':'')+$f(v);
-const Nf  = v => Math.round(v).toLocaleString();
+const MFL=['Jul 2026','Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027','Nov 2027','Dec 2027','Jan 2028','Feb 2028','Mar 2028','Apr 2028','May 2028','Jun 2028','Jul 2028','Aug 2028','Sep 2028','Oct 2028','Nov 2028','Dec 2028','Jan 2029','Feb 2029','Mar 2029'];
 
-// ── PUMICE STONE ──────────────────────────────────────────────────
-function pumiceMonthProfit(m){
-  const terra=Math.min(3500,m<1?0:Math.round(100*Math.pow(1.3,m-1)));
-  const gb=Math.min(350,Math.round(20*Math.pow(1.3,m)));
-  return terra*6+gb*4+gb*4;
-}
-function pumiceMonthRev(m){
-  const terra=Math.min(3500,m<1?0:Math.round(100*Math.pow(1.3,m-1)));
-  const gb=Math.min(350,Math.round(20*Math.pow(1.3,m)));
-  return terra*9.935+gb*6.685+gb*6.685;
-}
+const START_BALANCE=6000;
+const famExp   =[-2500,-3000,-6000,-6000,-4500,-4500,-4500,-4500,-4500,-4500,-4500,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,-7000,0,0,0,0,0,0];
+const ppc      =[6000,7000,7700,9800,9000,9000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const sk       =[500,1000,1500,3500,9500,13000,6500,4500,2000,1500,1500,1000,500,1000,1500,3500,9500,13000,6500,4500,2000,1500,1500,1000,500,1000,1500,0,0,0,0,0,0];
+const skExp    =[0,-1000,0,0,0,-5000,0,-10000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const pumice   =[0,0,0,2000,6000,8000,10000,12000,14000,16000,20000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000];
+const pumiceExp=[-8500,0,0,-15000,0,-30000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const rg       =[0,0,0,0,0,0,0,0,0,0,0,0,0,10000,20000,30000,40000,52000,70000,90000,100000,100000,100000,100000,100000,100000,100000,150000,200000,200000,200000,200000,200000];
+const rgExp    =[0,-1000,0,0,-5000,0,-15000,0,-15000,0,-20000,-30000,-25000,-35000,0,0,0,-100000,-200000,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const property =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-300000,-100000,-150000,-130000,0,-230000,0,0,0,0,0,0,0];
 
-// ── PPC SERVICES ──────────────────────────────────────────────────
-// Omni + Cooper's Cask confirmed/active now; Go Mental + Blossom Care expected ~6 wks out (pipeline)
-function ppcRev(m){
-  const omni=m<3?4000:5000,coopers=2000,goMental=1000; // Omni +$1,000 raise after 3 months
-  const blossom=m===0?700:m===1?800:1000;
-  const confirmed=omni+coopers;
-  return {confirmed, withOmni:confirmed+goMental+blossom};
+const N=MFL.length;
+const $f = v=>(v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString();
+
+const balance=[];
+let run=START_BALANCE;
+for(let i=0;i<N;i++){
+  run += famExp[i]+ppc[i]+sk[i]+skExp[i]+pumice[i]+pumiceExp[i]+rg[i]+rgExp[i]+property[i];
+  balance.push(run);
 }
 
-// ── LIFE EXPENSES ─────────────────────────────────────────────────
-function lifeExp(m){ return m===0?4000:5000; } // Aug 2026 $4K, Sep 2026+ $5K
-function oneTimeExp(m){ return m===1?3000:0; } // childbirth cost, Sep 2026
+// ── HEADER ROW ──────────────────────────────────────────────────────
+const cols=[
+  {l:'Month'},{l:'Family Exp'},{l:'PPC'},{l:'Sugar Keepers'},{l:'SK Exp'},
+  {l:'Pumice Stone'},{l:'Pumice Exp'},{l:'Rolling Grips'},{l:'RG Exp'},{l:'Property'},{l:'Balance'}
+];
+const thRow=document.getElementById('thRow');
+cols.forEach((c,i)=>{
+  const th=document.createElement('th');
+  if(i===0) th.style.textAlign='left';
+  th.textContent=c.l;
+  thRow.appendChild(th);
+});
 
-// ── ROLLING GRIPS ─────────────────────────────────────────────────
-// KS Dec 2026 (m=4), Amazon launch Mar 2027 (m=7 = 4+3 months for fulfillment+FBA)
-const RG_LAUNCH=8,RG_PRF_G=37,RG_PRF_S=44,RG_PEAK=10000,RG_SCALE=24;
-const RG_RAMP=1.3; // slowed from 1.5× — cash-flow safe growth to 10K/mo
-function rgDem(m){ return m<RG_LAUNCH?0:Math.min(RG_PEAK,Math.round(100*Math.pow(RG_RAMP,m-RG_LAUNCH))); }
-function rgMonthProfit(m){ const s=rgDem(m); return s*(m>=RG_SCALE?RG_PRF_S:RG_PRF_G); }
-function rgMonthRev(m){ return rgDem(m)*92; }
+// ── TABLE BODY ──────────────────────────────────────────────────────
+const tbody=document.getElementById('tblBody');
+const arrs=[famExp,ppc,sk,skExp,pumice,pumiceExp,rg,rgExp,property];
+for(let i=0;i<N;i++){
+  const tr=document.createElement('tr');
+  let cells=`<td>${MFL[i]}</td>`;
+  arrs.forEach(a=>{
+    const v=a[i];
+    cells+=`<td style="color:${v<0?'var(--red)':v>0?'var(--grn)':'var(--mut)'}">${v===0?'—':$f(v)}</td>`;
+  });
+  cells+=`<td style="font-weight:700;color:${balance[i]<0?'var(--red)':'var(--txt)'}">${$f(balance[i])}</td>`;
+  tr.innerHTML=cells;
+  tbody.appendChild(tr);
+}
+const totals=arrs.map(a=>a.reduce((s,v)=>s+v,0));
+const tot=document.createElement('tr'); tot.className='tot';
+let totCells=`<td>TOTAL</td>`;
+totals.forEach(t=>{ totCells+=`<td>${t===0?'—':$f(t)}</td>`; });
+totCells+=`<td>${$f(balance[N-1])}</td>`;
+tot.innerHTML=totCells;
+tbody.appendChild(tot);
 
-// ── SUGAR KEEPERS ─────────────────────────────────────────────────
-const SK_FLOOR=900,SK_PRF=2.90,SK_PRICE=4.00,SK_START_CAL=7; // PRICE=COG+PRF=$4/unit; FLOOR calibrated to $45K/$55K/$65K annual payouts
-// Jan peaks then falls Feb→Aug; Jun/Jul/Aug ≤$1500 revenue; Sep picks up; Nov-Dec peak
-const SK_SEA=[1.20,1.00,0.80,0.65,0.50,0.30,0.28,0.30,0.90,1.25,2.10,2.50];
-function skDem(m){ const c=(SK_START_CAL+m)%12; return Math.max(100,Math.round(SK_FLOOR*Math.pow(1.20,m/12)*SK_SEA[c])); }
-
-// ── SUGAR KEEPERS — pure demand projection (no inventory sim) ─────
-(function buildSKTable(){
-  let cumPrf=0;
-  const rows=[];
-  // Annual checkpoints: flag reorder in Sep each year (3-month lead → Dec arrival)
-  const reorderMonths=new Set([1,13,25]); // Sep 2026, Sep 2027, Sep 2028
-  for(let m=0;m<12;m++){
-    const d=skDem(m);
-    const prf=d*SK_PRF;
-    const rev=d*SK_PRICE;
-    cumPrf+=prf;
-    const reorder=reorderMonths.has(m)?'📦 Place order now (Dec arrival)':'';
-    rows.push({m,d,sold:d,prf,rev,cumPrf,reorder});
-  }
-  window._skRows=rows;
-})();
-
-// ── COMPUTE MONTHLY DATA ───────────────────────────────────────────
-const months=Array.from({length:12},(_,i)=>i);
-const pumiceRev=months.map(pumiceMonthRev);
-const pumicePrf=months.map(pumiceMonthProfit);
-const ppcRevConf=months.map(m=>ppcRev(m).confirmed);
-const ppcRevOmni=months.map(m=>ppcRev(m).withOmni);
-const rgRev=months.map(rgMonthRev);
-const rgPrf=months.map(rgMonthProfit);
-// KS campaign net income: $70K raised at 5% fee = $66,500, arrives Dec 2026 (m=4)
-const ksIncome=new Array(12).fill(0); ksIncome[4]=66500;
-const skRows=window._skRows;
-const skRev=skRows.map(r=>r.rev);
-const skPrf=skRows.map(r=>r.prf);
-const expenses=months.map(m=>lifeExp(m)+oneTimeExp(m));
-const totalPrfOmni=months.map(m=>pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]-expenses[m]);
-
-const periods=[[0,12]];
-function sumPeriod(arr,p){return arr.slice(p[0],p[1]).reduce((a,v)=>a+v,0);}
-
-const pumRevPer=periods.map(p=>sumPeriod(pumiceRev,p));
-const pumPrfPer=periods.map(p=>sumPeriod(pumicePrf,p));
-const ppcRevPer=periods.map(p=>sumPeriod(ppcRevOmni,p));
-const rgRevPer =periods.map(p=>sumPeriod(rgRev,p));
-const rgPrfPer =periods.map(p=>sumPeriod(rgPrf,p));
-const skRevPer =periods.map(p=>sumPeriod(skRev,p));
-const skPrfPer =periods.map(p=>sumPeriod(skPrf,p));
-const expPer   =periods.map(p=>sumPeriod(expenses,p));
-const netPer   =periods.map((_,i)=>pumPrfPer[i]+ppcRevPer[i]+rgPrfPer[i]+skPrfPer[i]-expPer[i]);
-
-const sum12=a=>a.reduce((s,v)=>s+v,0);
-const totPumRev=sum12(pumiceRev), totPumPrf=sum12(pumicePrf);
-const totPpcRev=sum12(ppcRevOmni);
-const totRgRev=sum12(rgRev),  totRgPrf=sum12(rgPrf);
-const totSkRev=sum12(skRev),  totSkPrf=sum12(skPrf);
-const totExp=sum12(expenses);
-const totNet=totPumPrf+totPpcRev+totRgPrf+totSkPrf-totExp;
-
-// ── HERO ──────────────────────────────────────────────────────────
-document.getElementById('h-pumice-rev').textContent='$'+Math.round(totPumPrf/1000)+'K';
-document.getElementById('h-ppc-rev').textContent='$'+Math.round(totPpcRev/1000)+'K';
-document.getElementById('h-rg-rev').textContent='$'+Math.round(totRgPrf/1000)+'K';
-document.getElementById('h-sk-rev').textContent='$'+Math.round(totSkPrf/1000)+'K';
-
-// ── PORTFOLIO KPIs ─────────────────────────────────────────────────
+// ── KPIs ──────────────────────────────────────────────────────────
+const totIncome = ppc.reduce((s,v)=>s+v,0)+sk.reduce((s,v)=>s+v,0)+pumice.reduce((s,v)=>s+v,0)+rg.reduce((s,v)=>s+v,0);
+const totExpense = famExp.reduce((s,v)=>s+v,0)+skExp.reduce((s,v)=>s+v,0)+pumiceExp.reduce((s,v)=>s+v,0)+rgExp.reduce((s,v)=>s+v,0)+property.reduce((s,v)=>s+v,0);
 const kpis=[
-  {l:'Total 12-Mo Revenue',     v:$f(totPumRev+totPpcRev+totRgRev+totSkRev), s:'All 4 businesses',          c:'var(--gold)'},
-  {l:'Life Expenses 12-Mo',     v:$f(totExp),                                  s:'$4K Aug\'26 → $5K/mo + $3K one-time', c:'var(--red)'},
-  {l:'12-Mo Net (all biz)',      v:$fs(totNet),                                 s:'after expenses',            c:totNet>0?'var(--grn)':'var(--red)'},
-  {l:'Peak Monthly (Combined)',  v:$f(Math.max(...totalPrfOmni)),               s:MFL[totalPrfOmni.indexOf(Math.max(...totalPrfOmni))], c:'var(--grn)'},
-  {l:'Break-Even Month',        v:(()=>{let c=0;for(let m=0;m<12;m++){c+=totalPrfOmni[m];if(c>0)return MFL[m];}return '12+mo';})(), s:'cumulative net turns positive', c:'var(--pur)'},
+  {l:'Starting Balance (Jul 2026)', v:$f(START_BALANCE), c:'var(--mut)'},
+  {l:'Final Balance (Mar 2029)',    v:$f(balance[N-1]),  c:balance[N-1]>=0?'var(--grn)':'var(--red)'},
+  {l:'Total Income vs Expenses',    v:$f(totIncome)+' / '+$f(totExpense), c:'var(--gold)'},
 ];
 const kr=document.getElementById('kpiRow');
 kpis.forEach(k=>{
   const d=document.createElement('div'); d.className='kpi';
-  d.innerHTML=`<div class="l">${k.l}</div><div class="v" style="color:${k.c}">${k.v}</div><div class="s">${k.s}</div>`;
+  d.innerHTML=`<div class="l">${k.l}</div><div class="v" style="color:${k.c}">${k.v}</div>`;
   kr.appendChild(d);
 });
 
-// ── SUMMARY TABLE ─────────────────────────────────────────────────
-const tbody=document.getElementById('sumBody');
-const tableRows=[
-  {label:'🪨 Pumice Stone Revenue',  rev:pumRevPer, tot:totPumRev, c:'var(--c-pumice)', sub:false},
-  {label:'  └ Net Profit',           rev:pumPrfPer, tot:totPumPrf, c:'var(--grn)',       sub:true},
-  {label:'📊 PPC Services (all clients)',rev:ppcRevPer, tot:totPpcRev, c:'var(--c-ppc)',     sub:false},
-  {label:'💪 Rolling Grips Revenue', rev:rgRevPer,  tot:totRgRev,  c:'var(--c-rg)',      sub:false},
-  {label:'  └ Net Profit',           rev:rgPrfPer,  tot:totRgPrf,  c:'var(--grn)',       sub:true},
-  {label:'🍬 Sugar Keepers Revenue', rev:skRevPer,  tot:totSkRev,  c:'var(--c-sk)',      sub:false},
-  {label:'  └ Net Profit',           rev:skPrfPer,  tot:totSkPrf,  c:'var(--grn)',       sub:true},
-  {label:'🏠 Life Expenses',          rev:expPer.map(v=>-v), tot:-totExp, c:'var(--red)', sub:false},
-  {label:'💰 TOTAL NET',              rev:netPer,    tot:totNet,    c:totNet>0?'var(--grn)':'var(--red)', sub:false, hi:true},
-];
-tableRows.forEach(r=>{
-  const tr=document.createElement('tr');
-  if(r.hi) tr.className='hi'; else if(r.sub) tr.className='sub';
-  const totCell=`<td style="font-weight:800;color:${r.tot<0?'var(--red)':r.c}">${r.tot<0?'−':'+'}${$f(r.tot)}</td>`;
-  tr.innerHTML=`<td style="${r.hi?'color:var(--gold);':''}">${r.label}</td>${totCell}`;
-  tbody.appendChild(tr);
-});
-
-// ── PORTFOLIO CHARTS ──────────────────────────────────────────────
-new Chart(document.getElementById('combinedChart').getContext('2d'),{
-  type:'bar',
+// ── CHART ──────────────────────────────────────────────────────────
+new Chart(document.getElementById('balChart').getContext('2d'),{
+  type:'line',
   data:{labels:MFL, datasets:[
-    {label:'Pumice Net Profit',     data:pumicePrf,          backgroundColor:'rgba(196,98,45,.55)',  stack:'s'},
-    {label:'PPC Revenue (all clients)', data:ppcRevOmni,         backgroundColor:'rgba(46,111,219,.55)', stack:'s'},
-    {label:'Rolling Grips Profit',  data:rgPrf,              backgroundColor:'rgba(139,181,0,.55)',  stack:'s'},
-    {label:'Sugar Keepers Profit',  data:skPrf,              backgroundColor:'rgba(200,119,34,.55)', stack:'s'},
-    {label:'Life Expenses',         data:expenses.map(v=>-v),backgroundColor:'rgba(192,57,43,.35)',  stack:'s'},
+    {label:'Balance', data:balance, borderColor:'#D4A843', backgroundColor:'rgba(212,168,67,.1)', fill:true, tension:.25, pointRadius:2},
+    {label:'Zero', data:new Array(N).fill(0), borderColor:'rgba(192,57,43,.4)', borderDash:[5,4], pointRadius:0, fill:false}
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{labels:{color:'#888',font:{size:11}}}},
-    scales:{x:{stacked:true,ticks:{color:'#888',font:{size:9},maxRotation:45},grid:{color:'#EDE8E0'}},
-            y:{stacked:true,ticks:{color:'#888',callback:v=>'$'+(v/1000).toFixed(0)+'K'},grid:{color:'#EDE8E0'}}}}
-});
-
-new Chart(document.getElementById('lifeChart').getContext('2d'),{
-  type:'line',
-  data:{labels:MFL, datasets:[
-    {label:'PPC Revenue (all clients)', data:ppcRevOmni,   backgroundColor:'rgba(46,111,219,.12)',borderColor:'#2E6FDB',fill:true,tension:.3,pointRadius:2},
-    {label:'PPC Confirmed only',    data:ppcRevConf,   borderColor:'rgba(46,111,219,.4)',fill:false,tension:.3,pointRadius:0,borderDash:[4,3]},
-    {label:'Life Expenses',         data:expenses,     backgroundColor:'rgba(192,57,43,.08)',borderColor:'#C0392B',fill:true,tension:.0,pointRadius:2},
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:'#888',font:{size:11}}}},
-    scales:{x:{ticks:{color:'#888',font:{size:9},maxRotation:45},grid:{color:'#EDE8E0'}},
-            y:{ticks:{color:'#888',callback:v=>'$'+v.toLocaleString()},grid:{color:'#EDE8E0'}}}}
-});
-
-// ── REORDER CASH FLOWS (deposits + balance payments by month) ─────
-function buildReorderFlows(){
-  const fl=new Array(12).fill(0);
-
-  // ── PUMICE STONE: 30/70 terms, 4-mo lead, 2-mo balance ───────────
-  {
-    const T_COG=3.935, G_COG=2.685, LEAD=4, BAL=2;
-    let iT=7000, iG=2000, iB=2000;
-    const ords=[];
-    const dT=m=>Math.min(3500,m<1?0:Math.round(100*Math.pow(1.3,m-1)));
-    const dG=m=>Math.min(350,Math.round(20*Math.pow(1.3,m)));
-    for(let m=0;m<12;m++){
-      ords.filter(o=>o.aM===m).forEach(o=>{
-        if(o.s==='T')iT+=o.q; else if(o.s==='G')iG+=o.q; else iB+=o.q;
-      });
-      ords.filter(o=>o.bM===m&&!o.bp).forEach(o=>{fl[m]+=o.t*0.70;o.bp=true;});
-      iT=Math.max(0,iT-dT(m)); iG=Math.max(0,iG-dG(m)); iB=Math.max(0,iB-dG(m));
-      [['T',iT,dT,T_COG,1000],['G',iG,dG,G_COG,500],['B',iB,dG,G_COG,500]].forEach(([s,iv,df,cog,mn])=>{
-        let p=iv;
-        for(let i=1;i<=LEAD;i++) p-=df(m+i<12?m+i:11);
-        if(p<0&&!ords.some(o=>o.s===s&&!o.bp&&o.aM>m&&o.aM<=m+LEAD)){
-          let q=0; for(let i=LEAD;i<LEAD+3;i++) q+=df(m+i<12?m+i:11);
-          q=Math.max(mn,Math.round(q/500)*500);
-          const t=q*cog; fl[m]+=t*0.30;
-          ords.push({s,q,t,aM:m+LEAD,bM:m+BAL,bp:false});
-        }
-      });
-    }
-  }
-
-  // ── SUGAR KEEPERS: single reorder, 30/70 terms, 2-mo manufacturing ─
-  // $15,000 order placed Mar 2027 (m=7), balance due May 2027 (m=9) when manufactured
-  {
-    const total=15000, dM=7, bM=9;
-    fl[dM]+=total*0.30;
-    fl[bM]+=total*0.70;
-  }
-
-  // ── ROLLING GRIPS: KS-funded first order, then cash-aware at 1.3× ramp ─
-  // First deposit at m=4 (Dec 2026, funded by KS $66.5K); balance m=6; arrives m=8
-  fl[4]+=25057*0.30; // $7,517 deposit
-  fl[6]+=25057*0.70; // $17,540 balance
-  {
-    const UNIT_COG=16.717, LEAD=4, BAL=2, MIN_BAL=10000;
-    let rgInv=0;
-    const ords=[{q:1000,aM:8}]; // first 1000 units, paid above
-    let cumBal=0; // track running cash to enforce $10K floor
-
-    for(let m=0;m<12;m++){
-      ords.filter(o=>o.aM===m).forEach(o=>rgInv+=o.q);
-      // current month income (before RG orders)
-      const inc=pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]+ksIncome[m];
-      if(m>=RG_LAUNCH){
-        rgInv=Math.max(0,rgInv-rgDem(m));
-        let proj=rgInv;
-        for(let i=1;i<=LEAD;i++){
-          proj-=rgDem(m+i);
-          ords.filter(o=>o.aM===m+i).forEach(o=>proj+=o.q);
-        }
-        if(proj<0&&!ords.some(o=>o.aM>m&&o.aM<=m+LEAD)){
-          let qty=0;
-          for(let i=LEAD;i<LEAD+3;i++) qty+=rgDem(m+i);
-          qty=Math.max(1000,Math.round(qty/500)*500);
-          const t=qty*UNIT_COG;
-          const dep=t*0.30;
-          // Only place order if cash stays ≥ $10K
-          if(cumBal+inc-expenses[m]-fl[m]-dep>=MIN_BAL){
-            fl[m]+=dep;
-            if(m+BAL<12) fl[m+BAL]+=t*0.70;
-            ords.push({q:qty,aM:m+LEAD});
-          }
-        }
-      }
-      cumBal+=inc-expenses[m]-fl[m];
-    }
-  }
-
-  return fl;
-}
-const reorderPay=buildReorderFlows();
-
-// ── CUMULATIVE NET PROFIT ─────────────────────────────────────────
-const cumNetData=(()=>{const a=[];let c=0;months.forEach(m=>{c+=totalPrfOmni[m]-reorderPay[m];a.push(c);});return a;})();
-const cumColors=cumNetData.map(v=>v>=0?'rgba(46,139,87,.8)':'rgba(192,57,43,.8)');
-new Chart(document.getElementById('cumChart').getContext('2d'),{
-  type:'line',
-  data:{labels:MFL,datasets:[
-    {label:'Cumulative Net',data:cumNetData,borderColor:'#D4A843',backgroundColor:'rgba(212,168,67,.08)',fill:true,tension:.3,pointRadius:3,
-     pointBackgroundColor:cumColors,pointBorderColor:cumColors},
-    {label:'Break-even',data:new Array(12).fill(0),borderColor:'rgba(192,57,43,.4)',borderDash:[5,4],pointRadius:0,fill:false},
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:'#888',font:{size:11}}},
-      tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+$fs(ctx.parsed.y)}}},
     scales:{
       x:{ticks:{color:'#888',font:{size:9},maxRotation:45},grid:{color:'#EDE8E0'}},
-      y:{ticks:{color:'#888',callback:v=>'$'+(v/1000).toFixed(0)+'K'},grid:{color:'#EDE8E0'}}}}
+      y:{ticks:{color:'#888',callback:v=>'$'+(v/1000).toFixed(0)+'K'},grid:{color:'#EDE8E0'}}
+    }}
 });
-
-// ── MONTH-BY-MONTH TABLE ─────────────────────────────────────────
-(function buildMoM(){
-  const tbody=document.getElementById('momBody');
-  let cumNet=0;
-  months.forEach(m=>{
-    const pumice = pumicePrf[m];
-    const ppc    = ppcRevOmni[m];
-    const rg     = rgPrf[m];
-    const ks     = ksIncome[m];
-    const sk     = skPrf[m];
-    const total  = pumice+ppc+rg+ks+sk;
-    const exp    = expenses[m];
-    const reord  = reorderPay[m];
-    const net    = total-exp-reord;
-    cumNet      += net;
-
-    const tr=document.createElement('tr');
-    const netColor=net>=0?'var(--grn)':'var(--red)';
-    const cumColor=cumNet>=0?'var(--grn)':'var(--red)';
-    const isBelowFloor=cumNet<10000;
-    if(isBelowFloor) tr.style.background='rgba(192,57,43,.08)';
-    const rgLabel=ks>0?`+${$f(rg+ks)}<span style="font-size:9px;color:#C8FF00"> +$${(ks/1000).toFixed(0)}K KS</span>`:(rg>0?'+'+$f(rg):'—');
-    tr.innerHTML=`
-      <td style="color:var(--mut);font-size:10.5px">${MFL[m]}</td>
-      <td style="color:var(--c-pumice)">${pumice>0?'+'+$f(pumice):'—'}</td>
-      <td style="color:var(--c-ppc)">+${$f(ppc)}</td>
-      <td style="color:var(--c-rg)">${rgLabel}</td>
-      <td style="color:var(--c-sk)">+${$f(sk)}</td>
-      <td style="font-weight:700">+${$f(total)}</td>
-      <td style="color:var(--red)">−${$f(exp)}</td>
-      <td style="color:#E08080;font-weight:600">${reord>0?'−'+$f(reord):'—'}</td>
-      <td style="font-weight:800;color:${netColor}">${net>=0?'+':'−'}${$f(Math.abs(net))}</td>
-      <td style="font-weight:700;color:${isBelowFloor?'var(--red)':cumColor}">${cumNet>=0?'+':'−'}${$f(Math.abs(cumNet))}${isBelowFloor?' ⚠️':''}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-  // Total row
-  const totInc  =months.reduce((s,m)=>s+pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]+ksIncome[m],0);
-  const totExp  =months.reduce((s,m)=>s+expenses[m],0);
-  const totReord=months.reduce((s,m)=>s+reorderPay[m],0);
-  const totNet  =totInc-totExp-totReord;
-  const tot=document.createElement('tr'); tot.className='tot';
-  tot.innerHTML=`
-    <td>TOTAL 12 MO</td>
-    <td>+${$f(months.reduce((s,m)=>s+pumicePrf[m],0))}</td>
-    <td>+${$f(months.reduce((s,m)=>s+ppcRevOmni[m],0))}</td>
-    <td>+${$f(months.reduce((s,m)=>s+rgPrf[m]+ksIncome[m],0))}</td>
-    <td>+${$f(months.reduce((s,m)=>s+skPrf[m],0))}</td>
-    <td>+${$f(totInc)}</td>
-    <td style="color:#E08080">−${$f(totExp)}</td>
-    <td style="color:#E08080">−${$f(totReord)}</td>
-    <td style="color:${totNet>=0?'#7EE8A2':'#E08080'};font-weight:800">${totNet>=0?'+':'−'}${$f(Math.abs(totNet))}</td>
-    <td></td>
-  `;
-  tbody.appendChild(tot);
-})();
-
 </script>
 </body>
 </html>
