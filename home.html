@@ -459,16 +459,12 @@ function buildReorderFlows(){
     }
   }
 
-  // ── SUGAR KEEPERS: hardcoded seasonal schedule, 30/70, 3-mo lead ─
-  // Two orders/year: Sep (holiday) + Feb (spring top-up), proportional to annual demand
+  // ── SUGAR KEEPERS: single reorder, 30/70 terms, 2-mo manufacturing ─
+  // $15,000 order placed Mar 2027 (m=7), balance due May 2027 (m=9) when manufactured
   {
-    const COG=1.10;
-    // [depositMonth, qty, balanceMonth]
-    [[1,5500,3],[6,4500,8],[13,6500,15],[18,5500,20],[25,7500,27],[30,6500,32]].forEach(([dM,q,bM])=>{
-      const t=q*COG;
-      if(dM<12) fl[dM]+=t*0.30;
-      if(bM<12) fl[bM]+=t*0.70;
-    });
+    const total=15000, dM=7, bM=9;
+    fl[dM]+=total*0.30;
+    fl[bM]+=total*0.70;
   }
 
   // ── ROLLING GRIPS: KS-funded first order, then cash-aware at 1.3× ramp ─
