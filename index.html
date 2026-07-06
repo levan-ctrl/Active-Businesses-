@@ -149,10 +149,10 @@ tr.tot td{background:#1C1410!important;color:#fff!important;font-weight:700;}
 <div class="hdr">
   <div class="hdr-l">
     <h1>Sifri Art <span>Pumice Stone</span></h1>
-    <p>Self-Funded · Aug 2026 – Jul 2029 · 3 Product Lines · 7,000 Starting Units</p>
+    <p>Self-Funded · Aug 2026 – Jul 2027 · 3 Product Lines · 7,000 Starting Units</p>
   </div>
   <div class="hdr-r">
-    <div class="lbl">36-Month Net Profit</div>
+    <div class="lbl">12-Month Net Profit</div>
     <div class="big" id="hProfit">—</div>
     <div class="lbl">on $100,729 total capital · <span style="color:var(--tl)" id="hROI">—</span></div>
   </div>
@@ -160,8 +160,8 @@ tr.tot td{background:#1C1410!important;color:#fff!important;font-weight:700;}
 
 <div class="kpis">
   <div class="kpi"><div class="l">Total Capital</div><div class="v" style="color:var(--terra)">$100,729</div><div class="s">$90,729 spent + $10K Jan 2027</div></div>
-  <div class="kpi"><div class="l">36-Mo Revenue</div><div class="v" style="color:var(--gold)" id="kRev">—</div><div class="s">Aug 2026–Jul 2029</div></div>
-  <div class="kpi"><div class="l">36-Mo Net Profit</div><div class="v" style="color:var(--grn)" id="kProfit">—</div><div class="s" id="kMargin">—</div></div>
+  <div class="kpi"><div class="l">12-Mo Revenue</div><div class="v" style="color:var(--gold)" id="kRev">—</div><div class="s">Aug 2026–Jul 2027</div></div>
+  <div class="kpi"><div class="l">12-Mo Net Profit</div><div class="v" style="color:var(--grn)" id="kProfit">—</div><div class="s" id="kMargin">—</div></div>
   <div class="kpi"><div class="l">Peak Month Profit</div><div class="v" style="color:var(--terra)" id="kPeak">—</div><div class="s" id="kPeakM">—</div></div>
   <div class="kpi"><div class="l">Payback Month</div><div class="v" style="color:var(--pur)" id="kPayback">—</div><div class="s">investment recovered</div></div>
 </div>
@@ -376,7 +376,7 @@ tr.tot td{background:#1C1410!important;color:#fff!important;font-weight:700;}
 <div class="sec" id="monthly" style="padding-top:10px;padding-bottom:4px;">
   <div class="tbl-wrap">
     <button class="tbl-toggle" id="tblBtn" onclick="toggleTbl()">
-      <span>📋 Full 36-Month Breakdown — Units Sold, Stock, Revenue, Profit, Cash</span>
+      <span>📋 Full 12-Month Breakdown — Units Sold, Stock, Revenue, Profit, Cash</span>
       <span class="arr">▼</span>
     </button>
     <div class="tbl-inner" id="tblInner">
@@ -416,7 +416,7 @@ tr.tot td{background:#1C1410!important;color:#fff!important;font-weight:700;}
     <div class="kpi"><div class="l">First Hits 3,500/mo</div><div class="v" style="color:var(--gold)" id="fFirstHit">—</div><div class="s" id="fBaseFirstHit">—</div></div>
     <div class="kpi"><div class="l">Sustained From</div><div class="v" style="color:var(--grn)" id="fSustained">—</div><div class="s">never dips below target again</div></div>
     <div class="kpi"><div class="l">Extra Capital Needed</div><div class="v" style="color:var(--terra)">+$8,500</div><div class="s">upfront, Aug 2026</div></div>
-    <div class="kpi"><div class="l">36-Mo Profit</div><div class="v" style="color:var(--grn)" id="fProfit">—</div><div class="s" id="fProfitDelta">—</div></div>
+    <div class="kpi"><div class="l">12-Mo Profit</div><div class="v" style="color:var(--grn)" id="fProfit">—</div><div class="s" id="fProfitDelta">—</div></div>
     <div class="kpi"><div class="l">Min Cash Balance</div><div class="v" id="fMinCash">—</div><div class="s">vs base case's, see note</div></div>
   </div>
 
@@ -431,7 +431,7 @@ tr.tot td{background:#1C1410!important;color:#fff!important;font-weight:700;}
 
   <div class="tbl-wrap">
     <button class="tbl-toggle" id="fastTblBtn" onclick="toggleFastTbl()">
-      <span>📋 Fast Ramp — Full 36-Month Breakdown</span>
+      <span>📋 Fast Ramp — Full 12-Month Breakdown</span>
       <span class="arr">▼</span>
     </button>
     <div class="tbl-inner" id="fastTblInner">
@@ -476,7 +476,7 @@ const SKUS   = ['terra','gray','black'];
 const MIN_Q  = {terra:2000, gray:1500, black:1500};
 const BUFFER_MOS = 6; // target months of stock to hold after each reorder arrives
 
-const MFL = ['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027','Nov 2027','Dec 2027','Jan 2028','Feb 2028','Mar 2028','Apr 2028','May 2028','Jun 2028','Jul 2028','Aug 2028','Sep 2028','Oct 2028','Nov 2028','Dec 2028','Jan 2029','Feb 2029','Mar 2029','Apr 2029','May 2029','Jun 2029','Jul 2029'];
+const MFL = ['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027'];
 const MSH = MFL.map(s=>s.replace(' 20','\''));
 
 // Terra: growth×/month starting Sep (m=1), capped at 3,500/mo
@@ -509,7 +509,7 @@ function simulate(demFn, injections) {
   // Aug+Sep (m<2) profit goes to launch ads, never enters cash pipeline
   let prevPrf = 0;
 
-  for (let m=0; m<36; m++) {
+  for (let m=0; m<12; m++) {
     const inj = injections[m] || 0;
     if (inj) cash += inj;
 
@@ -534,7 +534,7 @@ function simulate(demFn, injections) {
       const projWindow=(w)=>{
         let p=inv[sku];
         for(let i=1;i<=w;i++){
-          const fm=m+i; if(fm>=36) break;
+          const fm=m+i; if(fm>=12) break;
           p-=demFn(fm)[sku];
           orders.filter(o=>o.sku===sku&&o.arrM===fm).forEach(o=>p+=o.units);
         }
@@ -551,7 +551,7 @@ function simulate(demFn, injections) {
           // Try 6-month buffer order first; fall back to minimum if deposit unaffordable
           let bufDem=0;
           for(let i=lead;i<lead+BUFFER_MOS;i++){
-            const fm=m+i; if(fm>=36) break;
+            const fm=m+i; if(fm>=12) break;
             bufDem+=demFn(fm)[sku];
           }
           qty=Math.max(MIN_Q[sku], deficit+bufDem);
@@ -568,7 +568,7 @@ function simulate(demFn, injections) {
         // Balance check: project cash at balance month using growing demand profits
         let projBal=cash-dep;
         for(let bi=1;bi<=BAL_M[sku];bi++){
-          const bfm=m+bi; if(bfm>=36) break;
+          const bfm=m+bi; if(bfm>=12) break;
           const bPrf=SKUS.reduce((a,s)=>a+demFn(bfm)[s]*PRF[s],0);
           projBal+=(bfm<2)?0:bPrf;
           orders.filter(o=>o.balM===bfm&&!o.bPaid).forEach(o=>projBal-=o.total*0.70);
@@ -638,7 +638,7 @@ document.getElementById('kProfit').textContent=$f(totP);
 document.getElementById('kMargin').textContent=((totP/totRev)*100).toFixed(1)+'% margin';
 document.getElementById('kPeak').textContent=$f(peakP);
 document.getElementById('kPeakM').textContent=peakPm>=0?'from '+MSH[peakPm]:'—';
-document.getElementById('kPayback').textContent=payM>=0?MFL[payM]:'beyond 36 mo';
+document.getElementById('kPayback').textContent=payM>=0?MFL[payM]:'beyond 12 mo';
 
 // ── MAIN CHART ────────────────────────────────────────────────────────────────
 let mc=null;
@@ -723,8 +723,8 @@ reorders.forEach(o=>{
   tr.className=o.hasRO?'rr':'';
   const skuC=o.sku==='terra'?'#7A3010':o.sku==='gray'?'#3A6060':'#2A2A2A';
   const skuL=o.sku==='terra'?'🟫 Terracotta':o.sku==='gray'?'⬜ Gray':'⬛ Black';
-  const balLabel=o.balM<36?MFL[o.balM]:'after period';
-  const arrLabel=o.arrM<36?MFL[o.arrM]:'after period';
+  const balLabel=o.balM<12?MFL[o.balM]:'after period';
+  const arrLabel=o.arrM<12?MFL[o.arrM]:'after period';
   const psTag=o.isPS?'<span style="font-size:9px;background:#8E44AD;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">stone-only</span>':'';
   totalRC+=o.total;
   tr.innerHTML=`
@@ -740,7 +740,7 @@ reorders.forEach(o=>{
   rcBody.appendChild(tr);
 });
 const tot=document.createElement('tr');
-tot.innerHTML=`<td class="tot" style="background:#1C1410;color:#fff;font-weight:700" colspan="3">TOTAL (${reorders.length} orders)</td><td class="tot" style="background:#1C1410;color:#fff;font-weight:700;text-align:right">${$f(totalRC)}</td><td colspan="5" class="tot" style="background:#1C1410;color:rgba(255,255,255,.5);font-size:10px">total inventory investment across 36 months</td>`;
+tot.innerHTML=`<td class="tot" style="background:#1C1410;color:#fff;font-weight:700" colspan="3">TOTAL (${reorders.length} orders)</td><td class="tot" style="background:#1C1410;color:#fff;font-weight:700;text-align:right">${$f(totalRC)}</td><td colspan="5" class="tot" style="background:#1C1410;color:rgba(255,255,255,.5);font-size:10px">total inventory investment across 12 months</td>`;
 rcBody.appendChild(tot);
 
 // ── MONTHLY TABLE (reusable — used for base case + fast-ramp scenario) ────────
@@ -781,7 +781,7 @@ function renderMonthlyTable(simRows, simOrders, demFn, totRevV, totPV, tbodyId, 
     simOrders.filter(o=>o.orderM===r.m).forEach(o=>
       cashLines.push(`−${$f(o.deposit)} <span style="font-size:9px;font-weight:500;opacity:.75">${skuAbbr[o.sku]}30% ${Nf(o.units)}u${o.isPS?' stone':''}</span>`)
     );
-    simOrders.filter(o=>o.balM===r.m&&o.balM<36).forEach(o=>
+    simOrders.filter(o=>o.balM===r.m&&o.balM<12).forEach(o=>
       cashLines.push(`−${$f(o.total*0.70)} <span style="font-size:9px;font-weight:500;opacity:.75">${skuAbbr[o.sku]}70%</span>`)
     );
     const cashOutCell = cashLines.length > 0
@@ -804,7 +804,7 @@ function renderMonthlyTable(simRows, simOrders, demFn, totRevV, totPV, tbodyId, 
     tbody.appendChild(tr);
   });
   const totR=document.createElement('tr');
-  totR.innerHTML=`<td class="tot" colspan="7">36-MONTH TOTAL</td><td class="tot">${$f(totRevV)}</td><td class="tot">${$f(totPV)}</td><td class="tot" style="color:var(--red)">—</td><td class="tot" style="color:#C8B8F0">${totInjLabel}</td><td class="tot">—</td>`;
+  totR.innerHTML=`<td class="tot" colspan="7">12-MONTH TOTAL</td><td class="tot">${$f(totRevV)}</td><td class="tot">${$f(totPV)}</td><td class="tot" style="color:var(--red)">—</td><td class="tot" style="color:#C8B8F0">${totInjLabel}</td><td class="tot">—</td>`;
   tbody.appendChild(totR);
 }
 
@@ -847,9 +847,9 @@ function toggleFastTbl(){
   const baseMinCash=Math.min(...rows.map(r=>r.cash));
   const profitDelta=FAST_SIM.totP-totP;
 
-  document.getElementById('fFirstHit').textContent=fastFirst>=0?MFL[fastFirst]:'beyond 36 mo';
-  document.getElementById('fBaseFirstHit').textContent='base case: '+(baseFirst>=0?MFL[baseFirst]:'beyond 36 mo');
-  document.getElementById('fSustained').textContent=fastSustained>=0?MFL[fastSustained]:'not within 36 mo';
+  document.getElementById('fFirstHit').textContent=fastFirst>=0?MFL[fastFirst]:'beyond 12 mo';
+  document.getElementById('fBaseFirstHit').textContent='base case: '+(baseFirst>=0?MFL[baseFirst]:'beyond 12 mo');
+  document.getElementById('fSustained').textContent=fastSustained>=0?MFL[fastSustained]:'not within 12 mo';
   document.getElementById('fProfit').textContent=$f(FAST_SIM.totP);
   document.getElementById('fProfitDelta').textContent=(profitDelta>=0?'+':'')+$f(profitDelta)+' vs base';
   document.getElementById('fMinCash').textContent=$f(fastMinCash);

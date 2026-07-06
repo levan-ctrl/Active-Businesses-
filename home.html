@@ -151,14 +151,14 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
 <div class="hdr">
   <div class="hdr-inner">
     <h1>Levan Rurua — <span>Active Businesses</span></h1>
-    <p>36-Month Portfolio Overview · Aug 2026 – Jul 2029 · Phuket, Thailand</p>
+    <p>12-Month Portfolio Overview · Aug 2026 – Jul 2027 · Phuket, Thailand</p>
     <div class="biz-grid">
       <a class="biz-card" href="ppc.html">
         <div class="ico">📊</div>
         <div class="bname" style="color:#6FA3E0">PPC Services</div>
         <div class="bsub">2 Active + 2 Pipeline · Amazon PPC Management</div>
         <div class="bamt" id="h-ppc-rev">—</div>
-        <div class="blbl">36-Mo Income (all clients)</div>
+        <div class="blbl">12-Mo Income (all clients)</div>
         <div class="btn">Full Dashboard →</div>
       </a>
       <a class="biz-card" href="index.html">
@@ -166,7 +166,7 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
         <div class="bname" style="color:#F2A87E">Pumice Stone</div>
         <div class="bsub">Sifri Art · Amazon FBA · 3 SKUs</div>
         <div class="bamt" id="h-pumice-rev">—</div>
-        <div class="blbl">36-Mo Net Profit</div>
+        <div class="blbl">12-Mo Net Profit</div>
         <div class="btn">Full Dashboard →</div>
       </a>
       <a class="biz-card" href="rolling-grips.html">
@@ -174,7 +174,7 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
         <div class="bname" style="color:#C8FF00">Rolling Grips</div>
         <div class="bsub">Kickstarter Launch · Amazon FBA</div>
         <div class="bamt" id="h-rg-rev">—</div>
-        <div class="blbl">36-Mo Net Profit</div>
+        <div class="blbl">12-Mo Net Profit</div>
         <div class="btn">Full Dashboard →</div>
       </a>
       <a class="biz-card" href="sugar-keepers.html">
@@ -182,7 +182,7 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
         <div class="bname" style="color:#F5C896">Sugar Keepers</div>
         <div class="bsub">Sifri Art · 7 ASINs · Bear Flagship</div>
         <div class="bamt" id="h-sk-rev">—</div>
-        <div class="blbl">36-Mo Net Profit (forecast)</div>
+        <div class="blbl">12-Mo Net Profit (forecast)</div>
         <div class="btn">Full Dashboard →</div>
       </a>
     </div>
@@ -193,7 +193,7 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
 
 <!-- PORTFOLIO SUMMARY -->
 <div class="sec" style="padding-bottom:4px">
-  <div class="sec-hd">36-Month Portfolio Summary <span class="chip">All Businesses Combined</span></div>
+  <div class="sec-hd">12-Month Portfolio Summary <span class="chip">All Businesses Combined</span></div>
   <div class="alrt ora">
     <span>📌</span>
     <div><strong>Note:</strong> Pumice Stone, Rolling Grips, and Sugar Keepers are simulated projections. Sugar Keepers based on real Year 1 SellerBoard data ($27,475 net profit) with 20% YoY growth. PPC: Omni ($4K) + Cooper's Cask ($2K) active now; Go Mental ($1K) + Blossom Care ($700→$1K) expected ~6 weeks out. Family expenses ($4K Aug 2026, $5K/mo from Sep) plus a one-time $3K childbirth cost in Sep 2026 deducted from net.</div>
@@ -206,11 +206,7 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
       <thead>
         <tr>
           <th style="text-align:left">Business / Category</th>
-          <th>2026 (5 mo)</th>
-          <th>2027 (12 mo)</th>
-          <th>2028 (12 mo)</th>
-          <th>2029 (7 mo)</th>
-          <th>36-Mo Total</th>
+          <th>12-Mo Total</th>
         </tr>
       </thead>
       <tbody id="sumBody"></tbody>
@@ -261,10 +257,10 @@ table.detail tr.yr td{background:#F5E6D5!important;font-weight:700;}
 </div>
 
 
-<div class="foot">Active Businesses Dashboard · Levan Rurua · Aug 2026 – Jul 2029</div>
+<div class="foot">Active Businesses Dashboard · Levan Rurua · Aug 2026 – Jul 2027</div>
 
 <script>
-const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027','Nov 2027','Dec 2027','Jan 2028','Feb 2028','Mar 2028','Apr 2028','May 2028','Jun 2028','Jul 2028','Aug 2028','Sep 2028','Oct 2028','Nov 2028','Dec 2028','Jan 2029','Feb 2029','Mar 2029','Apr 2029','May 2029','Jun 2029','Jul 2029'];
+const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027'];
 const $f  = v => '$'+Math.round(Math.abs(v)).toLocaleString();
 const $fs = v => (v<0?'−':'')+$f(v);
 const Nf  = v => Math.round(v).toLocaleString();
@@ -314,7 +310,7 @@ function skDem(m){ const c=(SK_START_CAL+m)%12; return Math.max(100,Math.round(S
   const rows=[];
   // Annual checkpoints: flag reorder in Sep each year (3-month lead → Dec arrival)
   const reorderMonths=new Set([1,13,25]); // Sep 2026, Sep 2027, Sep 2028
-  for(let m=0;m<36;m++){
+  for(let m=0;m<12;m++){
     const d=skDem(m);
     const prf=d*SK_PRF;
     const rev=d*SK_PRICE;
@@ -326,7 +322,7 @@ function skDem(m){ const c=(SK_START_CAL+m)%12; return Math.max(100,Math.round(S
 })();
 
 // ── COMPUTE MONTHLY DATA ───────────────────────────────────────────
-const months=Array.from({length:36},(_,i)=>i);
+const months=Array.from({length:12},(_,i)=>i);
 const pumiceRev=months.map(pumiceMonthRev);
 const pumicePrf=months.map(pumiceMonthProfit);
 const ppcRevConf=months.map(m=>ppcRev(m).confirmed);
@@ -334,14 +330,14 @@ const ppcRevOmni=months.map(m=>ppcRev(m).withOmni);
 const rgRev=months.map(rgMonthRev);
 const rgPrf=months.map(rgMonthProfit);
 // KS campaign net income: $70K raised at 5% fee = $66,500, arrives Dec 2026 (m=4)
-const ksIncome=new Array(36).fill(0); ksIncome[4]=66500;
+const ksIncome=new Array(12).fill(0); ksIncome[4]=66500;
 const skRows=window._skRows;
 const skRev=skRows.map(r=>r.rev);
 const skPrf=skRows.map(r=>r.prf);
 const expenses=months.map(m=>lifeExp(m)+oneTimeExp(m));
 const totalPrfOmni=months.map(m=>pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]-expenses[m]);
 
-const periods=[[0,5],[5,17],[17,29],[29,36]];
+const periods=[[0,12]];
 function sumPeriod(arr,p){return arr.slice(p[0],p[1]).reduce((a,v)=>a+v,0);}
 
 const pumRevPer=periods.map(p=>sumPeriod(pumiceRev,p));
@@ -354,12 +350,12 @@ const skPrfPer =periods.map(p=>sumPeriod(skPrf,p));
 const expPer   =periods.map(p=>sumPeriod(expenses,p));
 const netPer   =periods.map((_,i)=>pumPrfPer[i]+ppcRevPer[i]+rgPrfPer[i]+skPrfPer[i]-expPer[i]);
 
-const sum36=a=>a.reduce((s,v)=>s+v,0);
-const totPumRev=sum36(pumiceRev), totPumPrf=sum36(pumicePrf);
-const totPpcRev=sum36(ppcRevOmni);
-const totRgRev=sum36(rgRev),  totRgPrf=sum36(rgPrf);
-const totSkRev=sum36(skRev),  totSkPrf=sum36(skPrf);
-const totExp=sum36(expenses);
+const sum12=a=>a.reduce((s,v)=>s+v,0);
+const totPumRev=sum12(pumiceRev), totPumPrf=sum12(pumicePrf);
+const totPpcRev=sum12(ppcRevOmni);
+const totRgRev=sum12(rgRev),  totRgPrf=sum12(rgPrf);
+const totSkRev=sum12(skRev),  totSkPrf=sum12(skPrf);
+const totExp=sum12(expenses);
 const totNet=totPumPrf+totPpcRev+totRgPrf+totSkPrf-totExp;
 
 // ── HERO ──────────────────────────────────────────────────────────
@@ -370,11 +366,11 @@ document.getElementById('h-sk-rev').textContent='$'+Math.round(totSkPrf/1000)+'K
 
 // ── PORTFOLIO KPIs ─────────────────────────────────────────────────
 const kpis=[
-  {l:'Total 36-Mo Revenue',     v:$f(totPumRev+totPpcRev+totRgRev+totSkRev), s:'All 4 businesses',          c:'var(--gold)'},
-  {l:'Life Expenses 36-Mo',     v:$f(totExp),                                  s:'$4K Aug\'26 → $5K/mo + $3K one-time', c:'var(--red)'},
-  {l:'36-Mo Net (all biz)',      v:$fs(totNet),                                 s:'after expenses',            c:totNet>0?'var(--grn)':'var(--red)'},
+  {l:'Total 12-Mo Revenue',     v:$f(totPumRev+totPpcRev+totRgRev+totSkRev), s:'All 4 businesses',          c:'var(--gold)'},
+  {l:'Life Expenses 12-Mo',     v:$f(totExp),                                  s:'$4K Aug\'26 → $5K/mo + $3K one-time', c:'var(--red)'},
+  {l:'12-Mo Net (all biz)',      v:$fs(totNet),                                 s:'after expenses',            c:totNet>0?'var(--grn)':'var(--red)'},
   {l:'Peak Monthly (Combined)',  v:$f(Math.max(...totalPrfOmni)),               s:MFL[totalPrfOmni.indexOf(Math.max(...totalPrfOmni))], c:'var(--grn)'},
-  {l:'Break-Even Month',        v:(()=>{let c=0;for(let m=0;m<36;m++){c+=totalPrfOmni[m];if(c>0)return MFL[m];}return '36+mo';})(), s:'cumulative net turns positive', c:'var(--pur)'},
+  {l:'Break-Even Month',        v:(()=>{let c=0;for(let m=0;m<12;m++){c+=totalPrfOmni[m];if(c>0)return MFL[m];}return '12+mo';})(), s:'cumulative net turns positive', c:'var(--pur)'},
 ];
 const kr=document.getElementById('kpiRow');
 kpis.forEach(k=>{
@@ -399,9 +395,8 @@ const tableRows=[
 tableRows.forEach(r=>{
   const tr=document.createElement('tr');
   if(r.hi) tr.className='hi'; else if(r.sub) tr.className='sub';
-  const cells=r.rev.map(v=>`<td style="color:${v<0?'var(--red)':r.c}">${v<0?'−':'+'}${$f(v)}</td>`).join('');
   const totCell=`<td style="font-weight:800;color:${r.tot<0?'var(--red)':r.c}">${r.tot<0?'−':'+'}${$f(r.tot)}</td>`;
-  tr.innerHTML=`<td style="${r.hi?'color:var(--gold);':''}">${r.label}</td>${cells}${totCell}`;
+  tr.innerHTML=`<td style="${r.hi?'color:var(--gold);':''}">${r.label}</td>${totCell}`;
   tbody.appendChild(tr);
 });
 
@@ -436,7 +431,7 @@ new Chart(document.getElementById('lifeChart').getContext('2d'),{
 
 // ── REORDER CASH FLOWS (deposits + balance payments by month) ─────
 function buildReorderFlows(){
-  const fl=new Array(36).fill(0);
+  const fl=new Array(12).fill(0);
 
   // ── PUMICE STONE: 30/70 terms, 4-mo lead, 2-mo balance ───────────
   {
@@ -445,7 +440,7 @@ function buildReorderFlows(){
     const ords=[];
     const dT=m=>Math.min(3500,m<1?0:Math.round(100*Math.pow(1.3,m-1)));
     const dG=m=>Math.min(350,Math.round(20*Math.pow(1.3,m)));
-    for(let m=0;m<36;m++){
+    for(let m=0;m<12;m++){
       ords.filter(o=>o.aM===m).forEach(o=>{
         if(o.s==='T')iT+=o.q; else if(o.s==='G')iG+=o.q; else iB+=o.q;
       });
@@ -453,9 +448,9 @@ function buildReorderFlows(){
       iT=Math.max(0,iT-dT(m)); iG=Math.max(0,iG-dG(m)); iB=Math.max(0,iB-dG(m));
       [['T',iT,dT,T_COG,1000],['G',iG,dG,G_COG,500],['B',iB,dG,G_COG,500]].forEach(([s,iv,df,cog,mn])=>{
         let p=iv;
-        for(let i=1;i<=LEAD;i++) p-=df(m+i<36?m+i:35);
+        for(let i=1;i<=LEAD;i++) p-=df(m+i<12?m+i:11);
         if(p<0&&!ords.some(o=>o.s===s&&!o.bp&&o.aM>m&&o.aM<=m+LEAD)){
-          let q=0; for(let i=LEAD;i<LEAD+3;i++) q+=df(m+i<36?m+i:35);
+          let q=0; for(let i=LEAD;i<LEAD+3;i++) q+=df(m+i<12?m+i:11);
           q=Math.max(mn,Math.round(q/500)*500);
           const t=q*cog; fl[m]+=t*0.30;
           ords.push({s,q,t,aM:m+LEAD,bM:m+BAL,bp:false});
@@ -471,8 +466,8 @@ function buildReorderFlows(){
     // [depositMonth, qty, balanceMonth]
     [[1,5500,3],[6,4500,8],[13,6500,15],[18,5500,20],[25,7500,27],[30,6500,32]].forEach(([dM,q,bM])=>{
       const t=q*COG;
-      if(dM<36) fl[dM]+=t*0.30;
-      if(bM<36) fl[bM]+=t*0.70;
+      if(dM<12) fl[dM]+=t*0.30;
+      if(bM<12) fl[bM]+=t*0.70;
     });
   }
 
@@ -486,7 +481,7 @@ function buildReorderFlows(){
     const ords=[{q:1000,aM:8}]; // first 1000 units, paid above
     let cumBal=0; // track running cash to enforce $10K floor
 
-    for(let m=0;m<36;m++){
+    for(let m=0;m<12;m++){
       ords.filter(o=>o.aM===m).forEach(o=>rgInv+=o.q);
       // current month income (before RG orders)
       const inc=pumicePrf[m]+ppcRevOmni[m]+rgPrf[m]+skPrf[m]+ksIncome[m];
@@ -506,7 +501,7 @@ function buildReorderFlows(){
           // Only place order if cash stays ≥ $10K
           if(cumBal+inc-expenses[m]-fl[m]-dep>=MIN_BAL){
             fl[m]+=dep;
-            if(m+BAL<36) fl[m+BAL]+=t*0.70;
+            if(m+BAL<12) fl[m+BAL]+=t*0.70;
             ords.push({q:qty,aM:m+LEAD});
           }
         }
@@ -527,7 +522,7 @@ new Chart(document.getElementById('cumChart').getContext('2d'),{
   data:{labels:MFL,datasets:[
     {label:'Cumulative Net',data:cumNetData,borderColor:'#D4A843',backgroundColor:'rgba(212,168,67,.08)',fill:true,tension:.3,pointRadius:3,
      pointBackgroundColor:cumColors,pointBorderColor:cumColors},
-    {label:'Break-even',data:new Array(36).fill(0),borderColor:'rgba(192,57,43,.4)',borderDash:[5,4],pointRadius:0,fill:false},
+    {label:'Break-even',data:new Array(12).fill(0),borderColor:'rgba(192,57,43,.4)',borderDash:[5,4],pointRadius:0,fill:false},
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{labels:{color:'#888',font:{size:11}}},
@@ -557,8 +552,6 @@ new Chart(document.getElementById('cumChart').getContext('2d'),{
     const netColor=net>=0?'var(--grn)':'var(--red)';
     const cumColor=cumNet>=0?'var(--grn)':'var(--red)';
     const isBelowFloor=cumNet<10000;
-    const isYrEnd=(m===4||m===16||m===28);
-    if(isYrEnd) tr.style.borderTop='2px solid #C8A870';
     if(isBelowFloor) tr.style.background='rgba(192,57,43,.08)';
     const rgLabel=ks>0?`+${$f(rg+ks)}<span style="font-size:9px;color:#C8FF00"> +$${(ks/1000).toFixed(0)}K KS</span>`:(rg>0?'+'+$f(rg):'—');
     tr.innerHTML=`
@@ -582,7 +575,7 @@ new Chart(document.getElementById('cumChart').getContext('2d'),{
   const totNet  =totInc-totExp-totReord;
   const tot=document.createElement('tr'); tot.className='tot';
   tot.innerHTML=`
-    <td>TOTAL 36 MO</td>
+    <td>TOTAL 12 MO</td>
     <td>+${$f(months.reduce((s,m)=>s+pumicePrf[m],0))}</td>
     <td>+${$f(months.reduce((s,m)=>s+ppcRevOmni[m],0))}</td>
     <td>+${$f(months.reduce((s,m)=>s+rgPrf[m]+ksIncome[m],0))}</td>

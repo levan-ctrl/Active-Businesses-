@@ -116,12 +116,12 @@ tr.yr td{background:#F5E6D5!important;font-weight:700;}
 <div class="hdr">
   <div class="hdr-l">
     <h1>Sifri Art <span>Brown Sugar Keepers</span></h1>
-    <p>Amazon FBA · 7 ASINs · Bear Flagship · 20% YoY Growth · Aug 2026 – Jul 2029</p>
+    <p>Amazon FBA · 7 ASINs · Bear Flagship · Aug 2026 – Jul 2027</p>
   </div>
   <div class="hdr-r">
-    <div class="lbl">36-Mo Forecast Net Profit</div>
+    <div class="lbl">12-Mo Forecast Net Profit</div>
     <div class="big" id="hProfit">—</div>
-    <div class="lbl">$2.90/unit · 20% YoY growth · 1,500/mo floor</div>
+    <div class="lbl">$2.90/unit · seasonal demand · calibrated to $50K/12mo target</div>
   </div>
 </div>
 
@@ -231,7 +231,7 @@ tr.yr td{background:#F5E6D5!important;font-weight:700;}
 <div class="sec" style="padding-bottom:12px">
   <div class="sec-hd">Revenue & Profit Forecast</div>
   <div class="chart-wrap" style="margin-bottom:10px">
-    <h3>Monthly Units Sold — Forecast (Aug 2026 – Jul 2029) <span style="font-size:10px;color:var(--mut);font-weight:400">20% YoY growth · seasonal peaks · 1,500/mo floor</span></h3>
+    <h3>Monthly Units Sold — Forecast (Aug 2026 – Jul 2027) <span style="font-size:10px;color:var(--mut);font-weight:400">20% YoY growth · seasonal peaks · 1,500/mo floor</span></h3>
     <div class="cw"><canvas id="unitsChart"></canvas></div>
   </div>
   <div class="two-c">
@@ -246,11 +246,11 @@ tr.yr td{background:#F5E6D5!important;font-weight:700;}
   </div>
 </div>
 
-<!-- 36-MONTH TABLE -->
+<!-- 12-MONTH TABLE -->
 <div class="sec">
   <div class="tbl-wrap">
     <button class="tbl-toggle op" onclick="this.classList.toggle('op');document.getElementById('tblInner').classList.toggle('op')">
-      <span>🍬 Full 36-Month Breakdown — Brown Sugar Keepers</span>
+      <span>🍬 Full 12-Month Breakdown — Brown Sugar Keepers</span>
       <span class="arr">▼</span>
     </button>
     <div class="tbl-inner op" id="tblInner">
@@ -272,17 +272,17 @@ tr.yr td{background:#F5E6D5!important;font-weight:700;}
   </div>
 </div>
 
-<div class="foot">Active Businesses Dashboard · Sifri Art Brown Sugar Keepers · Aug 2026 – Jul 2029 · SellerBoard Data: Jul 2025 – Jun 2026</div>
+<div class="foot">Active Businesses Dashboard · Sifri Art Brown Sugar Keepers · Aug 2026 – Jul 2027 · SellerBoard Data: Jul 2025 – Jun 2026</div>
 
 <script>
-const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027','Nov 2027','Dec 2027','Jan 2028','Feb 2028','Mar 2028','Apr 2028','May 2028','Jun 2028','Jul 2028','Aug 2028','Sep 2028','Oct 2028','Nov 2028','Dec 2028','Jan 2029','Feb 2029','Mar 2029','Apr 2029','May 2029','Jun 2029','Jul 2029'];
+const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027'];
 
 // ── CONSTANTS ──────────────────────────────────────────────────────
 const PRF        = 2.90;   // net profit per unit (after all Amazon fees, PPC, refunds)
 const COG        = 1.10;   // supplier cost per unit
 const AVG_PRICE  = 4.00;   // Amazon payout/unit = COG + net profit (retail ~$12, Amazon keeps the rest)
 const START_INV  = 6600;   // ~1,000 current + 5,500 incoming + 100 bear/cat/spoon
-const FLOOR      = 900;    // calibrated: $45K/$55K/$65K annual payout at 20% YoY growth
+const FLOOR      = 1366;   // calibrated to $50K next-12-mo net profit target, per SellerBoard trailing-12-mo trend
 
 // Calendar month for Aug 2026 = index 7 (0=Jan)
 const START_CAL  = 7;
@@ -304,7 +304,7 @@ const MIN_ORD = 2500;
 
 const pendingOrders = [];
 
-for(let m=0; m<36; m++){
+for(let m=0; m<12; m++){
   // Incoming orders
   pendingOrders.filter(o=>o.arrM===m).forEach(o=>inv+=o.qty);
 
@@ -343,18 +343,14 @@ const totRev    = rows.reduce((s,r)=>s+r.rev,0);
 const totPrf    = rows.reduce((s,r)=>s+r.prf,0);
 const peakM     = rows.reduce((a,r,i)=>r.sold>rows[a].sold?i:a,0);
 const stockouts = rows.filter(r=>r.stockout).length;
-const y1Units   = rows.slice(0,12).reduce((s,r)=>s+r.sold,0);
-const y2Units   = rows.slice(12,24).reduce((s,r)=>s+r.sold,0);
 
 document.getElementById('hProfit').textContent=$f(totPrf);
 
 const kpis=[
   {l:'Year 1 Actual Net Profit',  v:'$27,475',       s:'Jul 2025 – Jun 2026 (real)',          c:'var(--amber)'},
-  {l:'Forecast Yr 2 Net Profit',  v:$f(rows.slice(0,12).reduce((s,r)=>s+r.prf,0)), s:'Aug 2026 – Jul 2027', c:'var(--grn)'},
-  {l:'Forecast Yr 3 Net Profit',  v:$f(rows.slice(12,24).reduce((s,r)=>s+r.prf,0)), s:'Aug 2027 – Jul 2028', c:'var(--grn)'},
-  {l:'Forecast Yr 4 Net Profit',  v:$f(rows.slice(24,36).reduce((s,r)=>s+r.prf,0)), s:'Aug 2028 – Jul 2029', c:'var(--grn)'},
-  {l:'36-Mo Net Profit Total',    v:$f(totPrf),      s:'forecast period only',               c:'var(--sk)'},
-  {l:'36-Mo Units Sold',          v:Nf(totSold),     s:'forecast Aug 2026–Jul 2029',          c:'var(--txt)'},
+  {l:'Next 12-Mo Forecast',       v:$f(totPrf),      s:'Aug 2026 – Jul 2027 · target $50K',   c:'var(--grn)'},
+  {l:'12-Mo Net Profit Total',    v:$f(totPrf),      s:'forecast period only',               c:'var(--sk)'},
+  {l:'12-Mo Units Sold',          v:Nf(totSold),     s:'forecast Aug 2026–Jul 2027',          c:'var(--txt)'},
   {l:'Peak Month',                v:MFL[peakM],      s:Nf(rows[peakM].sold)+' units sold',   c:'var(--amber)'},
   {l:'Peak Net Profit',           v:$f(rows[peakM].prf), s:'in '+MFL[peakM],                 c:'var(--grn)'},
   {l:'Stock-Outs',                v:stockouts,       s:stockouts===0?'None ✅':'Months missed',c:stockouts===0?'var(--grn)':'var(--red)'},
@@ -422,7 +418,6 @@ let totRevT=0, totPrfT=0, totSoldT=0;
 rows.forEach((r,i)=>{
   totRevT+=r.rev; totPrfT+=r.prf; totSoldT+=r.sold;
   const isPeak = r.sold > 2000;
-  const isYrEnd = (i===11||i===23||i===35);
   const tr = document.createElement('tr');
   if(isPeak) tr.className='pk';
   tr.innerHTML=`
@@ -435,16 +430,9 @@ rows.forEach((r,i)=>{
     <td style="font-size:10px;color:var(--ora)">${r.reorder||'—'}</td>
   `;
   tbody.appendChild(tr);
-  if(isYrEnd){
-    const yr = Math.floor(i/12)+2;
-    const ts = rows.slice(i-11, i+1);
-    const yTr=document.createElement('tr'); yTr.className='yr';
-    yTr.innerHTML=`<td>YEAR ${yr} TOTAL</td><td>${Nf(ts.reduce((s,r)=>s+r.sold,0))}</td><td>${$f(ts.reduce((s,r)=>s+r.rev,0))}</td><td style="color:var(--grn)">${$f(ts.reduce((s,r)=>s+r.prf,0))}</td><td>—</td><td>—</td><td>—</td>`;
-    tbody.appendChild(yTr);
-  }
 });
 const tot=document.createElement('tr'); tot.className='tot';
-tot.innerHTML=`<td colspan="2">TOTAL 36 MO · ${Nf(totSoldT)} units</td><td>${$f(totRevT)}</td><td>${$f(totPrfT)}</td><td colspan="3"></td>`;
+tot.innerHTML=`<td colspan="2">TOTAL 12 MO · ${Nf(totSoldT)} units</td><td>${$f(totRevT)}</td><td>${$f(totPrfT)}</td><td colspan="3"></td>`;
 tbody.appendChild(tot);
 </script>
 </body>

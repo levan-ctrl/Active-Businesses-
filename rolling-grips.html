@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Rolling Grips — 36-Month Forecast</title>
+<title>Rolling Grips — 12-Month Forecast</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
@@ -121,10 +121,10 @@ tr.stk td{background:#FEE!important;}
 <div class="hdr">
   <div class="hdr-l">
     <h1>Rolling <span>Grips</span></h1>
-    <p>KS Launch Dec 2026 · Amazon Mar 2027 · 36-Month Forecast · Aug 2026 – Jul 2029</p>
+    <p>KS Launch Dec 2026 · Amazon Mar 2027 · 12-Month Forecast · Aug 2026 – Jul 2027</p>
   </div>
   <div class="hdr-r">
-    <div class="lbl">36-Mo Net Profit (after Amazon launch)</div>
+    <div class="lbl">12-Mo Net Profit (after Amazon launch)</div>
     <div class="big" id="hProfit">—</div>
     <div class="lbl">Goal: 10,000 units/mo · 50,000 units in stock</div>
   </div>
@@ -230,7 +230,7 @@ tr.stk td{background:#FEE!important;}
 
 <!-- CHARTS -->
 <div class="sec" style="padding-bottom:12px">
-  <div class="sec-hd">36-Month Forecast Charts</div>
+  <div class="sec-hd">12-Month Forecast Charts</div>
   <div class="two-c" style="margin-bottom:10px">
     <div class="chart-wrap">
       <h3>Monthly Units Sold vs Demand</h3>
@@ -251,7 +251,7 @@ tr.stk td{background:#FEE!important;}
 <div class="sec">
   <div class="tbl-wrap">
     <button class="tbl-toggle op" onclick="this.classList.toggle('op');document.getElementById('tblInner').classList.toggle('op')">
-      <span>💪 Full 36-Month Breakdown — Kickstarter · Manufacturing · Amazon Sales</span>
+      <span>💪 Full 12-Month Breakdown — Kickstarter · Manufacturing · Amazon Sales</span>
       <span class="arr">▼</span>
     </button>
     <div class="tbl-inner op" id="tblInner">
@@ -276,10 +276,10 @@ tr.stk td{background:#FEE!important;}
   </div>
 </div>
 
-<div class="foot">Active Businesses Dashboard · Rolling Grips · Aug 2026 – Jul 2029 · Goal: 10,000 units/mo</div>
+<div class="foot">Active Businesses Dashboard · Rolling Grips · Aug 2026 – Jul 2027 · Goal: 10,000 units/mo</div>
 
 <script>
-const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027','Nov 2027','Dec 2027','Jan 2028','Feb 2028','Mar 2028','Apr 2028','May 2028','Jun 2028','Jul 2028','Aug 2028','Sep 2028','Oct 2028','Nov 2028','Dec 2028','Jan 2029','Feb 2029','Mar 2029','Apr 2029','May 2029','Jun 2029','Jul 2029'];
+const MFL=['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027'];
 
 // ── CONSTANTS ──────────────────────────────────────────────────────
 const KS_RAISED   = 70000;
@@ -321,7 +321,7 @@ function simulate(){
   let oid=1, ksShipped=false, firstOrdDone=false;
   const rows=[];
 
-  for(let m=0; m<36; m++){
+  for(let m=0; m<12; m++){
     // 1. Injection
     let inj=0;
     if(m===1){inj=KS_NET; cash+=inj;} // KS money arrives Sep 2026
@@ -350,7 +350,7 @@ function simulate(){
     const projWindow=(w)=>{
       let p=inv;
       for(let i=1;i<=w;i++){
-        const fm=m+i; if(fm>=36) break;
+        const fm=m+i; if(fm>=12) break;
         p-=dem(fm);
         orders.filter(o=>o.sku&&o.arrM===fm).forEach(o=>p+=o.units); // unreachable but safe
         orders.filter(o=>!o.sku&&o.arrM===fm).forEach(o=>p+=o.units);
@@ -378,7 +378,7 @@ function simulate(){
         const deficit=Math.max(0,-projWindow(LEAD));
         let bufDem=0;
         for(let i=LEAD;i<LEAD+BUFFER;i++){
-          const fm=m+i; if(fm>=36) break;
+          const fm=m+i; if(fm>=12) break;
           bufDem+=dem(fm);
         }
         let qty=Math.max(MIN_ORD, Math.ceil((deficit+bufDem)/500)*500);
@@ -387,7 +387,7 @@ function simulate(){
         // Project what cash will be at balance time (without this order's dep/bal)
         let baseAtBal=cash;
         for(let bi=1;bi<=BAL_M;bi++){
-          const bfm=m+bi; if(bfm>=36) break;
+          const bfm=m+bi; if(bfm>=12) break;
           baseAtBal+=dem(bfm)*(bfm>=SCALE_M?PRF_S:PRF_G);
           orders.filter(o=>o.balM===bfm&&!o.bPaid).forEach(o=>baseAtBal-=o.total*0.70);
         }
@@ -433,22 +433,22 @@ rows.forEach((r,i)=>{
   if(r.sold>peakSold){peakSold=r.sold;peakM=i;}
   if(r.stockout) stockouts++;
 });
-const finalCash=rows[35].cash;
-const finalInv=rows[35].inv;
+const finalCash=rows[11].cash;
+const finalInv=rows[11].inv;
 
 document.getElementById('hProfit').textContent=$f(totPrf);
 
 const kpis=[
   {l:'KS Net (after 5% fee)',   v:$f(KS_NET),        s:'from $70K goal',                    c:'#D4A843'},
   {l:'KS Backers to Fulfill',   v:Nf(KS_BACKERS),    s:'~$82 avg pledge assumed',            c:'var(--txt)'},
-  {l:'36-Mo Amazon Revenue',    v:$f(totRev),         s:'Aug 2026 – Jul 2029',                c:'var(--grn)'},
-  {l:'36-Mo Net Profit',        v:$f(totPrf),         s:'after PPC & all costs',              c:'var(--grn)'},
+  {l:'12-Mo Amazon Revenue',    v:$f(totRev),         s:'Aug 2026 – Jul 2027',                c:'var(--grn)'},
+  {l:'12-Mo Net Profit',        v:$f(totPrf),         s:'after PPC & all costs',              c:'var(--grn)'},
   {l:'Peak Month',              v:Nf(peakSold)+' u',  s:peakM>=0?MFL[peakM]:'—',             c:'#C8FF00'.replace('#C8','#88')},
-  {l:'Final Cash (Jul 2029)',   v:$f(finalCash),      s:finalCash>0?'Positive ✅':'Check ⚠️', c:finalCash>0?'var(--grn)':'var(--red)'},
-  {l:'Final Inventory',         v:Nf(finalInv)+' u',  s:'units in stock Jul 2029',            c:'#2E6FDB'},
+  {l:'Final Cash (Jul 2027)',   v:$f(finalCash),      s:finalCash>0?'Positive ✅':'Check ⚠️', c:finalCash>0?'var(--grn)':'var(--red)'},
+  {l:'Final Inventory',         v:Nf(finalInv)+' u',  s:'units in stock Jul 2027',            c:'#2E6FDB'},
   {l:'Stock-Outs',              v:stockouts,           s:stockouts===0?'None ✅':'Months w/ missed sales', c:stockouts===0?'var(--grn)':'var(--red)'},
-  {l:'Path to 10K/mo',         v:rows.find(r=>r.sold>=10000)?MFL[rows.findIndex(r=>r.sold>=10000)]:'36+ mo', s:'at 1.3× monthly growth (cash-safe)',c:'var(--ora)'},
-  {l:'50K Stock Achieved',      v:rows.find(r=>r.inv>=50000)?MFL[rows.findIndex(r=>r.inv>=50000)]:'36+ mo', s:'consistently',c:'var(--ora)'},
+  {l:'Path to 10K/mo',         v:rows.find(r=>r.sold>=10000)?MFL[rows.findIndex(r=>r.sold>=10000)]:'12+ mo', s:'at 1.3× monthly growth (cash-safe)',c:'var(--ora)'},
+  {l:'50K Stock Achieved',      v:rows.find(r=>r.inv>=50000)?MFL[rows.findIndex(r=>r.inv>=50000)]:'12+ mo', s:'consistently',c:'var(--ora)'},
 ];
 const kr=document.getElementById('kpiRow');
 kpis.slice(0,5).forEach(k=>{
@@ -554,7 +554,7 @@ rows.forEach(r=>{
   tbody.appendChild(tr);
 });
 const tot=document.createElement('tr'); tot.className='tot';
-tot.innerHTML=`<td colspan="5">TOTAL 36 MO</td><td>${$f(totRevT)}</td><td>${$f(totPrfT)}</td><td style="color:#E08080">−${$f(totBalT+totDepT)}</td><td>—</td><td>${$f(rows[35].cash)}</td>`;
+tot.innerHTML=`<td colspan="5">TOTAL 12 MO</td><td>${$f(totRevT)}</td><td>${$f(totPrfT)}</td><td style="color:#E08080">−${$f(totBalT+totDepT)}</td><td>—</td><td>${$f(rows[11].cash)}</td>`;
 tbody.appendChild(tot);
 </script>
 </body>
