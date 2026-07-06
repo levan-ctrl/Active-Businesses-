@@ -284,7 +284,7 @@ function pumiceMonthRev(m){
 // ── PPC SERVICES ──────────────────────────────────────────────────
 // Omni + Cooper's Cask confirmed/active now; Go Mental + Blossom Care expected ~6 wks out (pipeline)
 function ppcRev(m){
-  const omni=4000,coopers=2000,goMental=1000;
+  const omni=m<3?4000:5000,coopers=2000,goMental=1000; // Omni +$1,000 raise after 3 months
   const blossom=m===0?700:m===1?800:1000;
   const confirmed=omni+coopers;
   return {confirmed, withOmni:confirmed+goMental+blossom};
