@@ -10,6 +10,7 @@
   --gold:#D4A843;--grn:#2E8B57;--red:#C0392B;
   --bg:#F7F3EE;--card:#fff;--bdr:#E0D5C8;
   --txt:#2A2A2A;--mut:#6B6B6B;--nav:#1C1410;
+  --c-pumice:#C4622D;--c-ppc:#2E6FDB;--c-rg:#8BB500;--c-sk:#C87722;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:13px;}
@@ -21,7 +22,21 @@ nav a:hover,nav a.act{color:#fff;border-bottom-color:var(--gold);}
 .hdr{background:linear-gradient(135deg,#1C1410 0%,#2A2010 55%,#3D2A08 100%);color:#fff;padding:24px 28px;}
 .hdr h1{font-size:24px;font-weight:800;}
 .hdr h1 span{color:var(--gold);}
-.hdr p{font-size:12px;opacity:.65;margin-top:4px;}
+.hdr p{font-size:12px;opacity:.65;margin-top:4px;margin-bottom:18px;}
+.biz-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1000px;}
+@media(max-width:800px){.biz-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.biz-grid{grid-template-columns:1fr;}}
+.biz-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:16px 14px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;display:block;color:#fff;}
+.biz-card:first-child{border-radius:10px 0 0 10px;}
+.biz-card:last-child{border-radius:0 10px 10px 0;}
+.biz-card:hover{background:rgba(255,255,255,.13);transform:translateY(-2px);}
+.biz-card .ico{font-size:22px;margin-bottom:6px;}
+.biz-card .bname{font-size:12px;font-weight:800;margin-bottom:3px;}
+.biz-card .bsub{font-size:9.5px;opacity:.5;margin-bottom:9px;}
+.biz-card .bamt{font-size:19px;font-weight:800;}
+.biz-card .blbl{font-size:9.5px;opacity:.5;margin-top:2px;}
+.biz-card .btn{display:inline-block;margin-top:9px;background:rgba(255,255,255,.12);padding:4px 13px;border-radius:20px;font-size:10px;font-weight:700;transition:background .2s;}
+.biz-card:hover .btn{background:rgba(255,255,255,.22);}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 24px 0;}
 @media(max-width:700px){.kpis{grid-template-columns:1fr;}}
 .kpi{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;padding:12px 14px;text-align:center;}
@@ -31,6 +46,15 @@ nav a:hover,nav a.act{color:#fff;border-bottom-color:var(--gold);}
 .sec-hd{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);font-weight:700;margin-bottom:10px;}
 .chart-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;padding:14px;margin-bottom:16px;}
 .cw{position:relative;height:260px;}
+.sum-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;overflow:hidden;margin-bottom:16px;}
+table.sum{width:100%;border-collapse:collapse;font-size:11.5px;}
+table.sum th{background:var(--nav);color:#fff;padding:8px 12px;text-align:right;font-size:10px;font-weight:600;white-space:nowrap;}
+table.sum th:first-child{text-align:left;}
+table.sum td{padding:8px 12px;border-bottom:1px solid var(--bdr);text-align:right;}
+table.sum td:first-child{text-align:left;font-weight:700;}
+table.sum tr:last-child td{border:none;}
+table.sum tr.sub td{background:#F9F6F2;font-weight:500;}
+table.sum tr.hi td{background:#1C1410;color:#fff;font-weight:800;font-size:12px;}
 .tbl-wrap{background:var(--card);border:1.5px solid var(--bdr);border-radius:9px;overflow-x:auto;margin-bottom:24px;}
 table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap;}
 th{background:var(--nav);color:#fff;padding:7px 10px;text-align:right;font-size:10px;font-weight:600;}
@@ -56,9 +80,60 @@ tr.tot td{background:var(--nav);color:#fff;font-weight:700;}
 <div class="hdr">
   <h1>Levan Rurua — <span>Active Businesses</span></h1>
   <p>Monthly Ledger · Jul 2026 – Mar 2029 · Phuket, Thailand</p>
+  <div class="biz-grid">
+    <a class="biz-card" href="ppc.html">
+      <div class="ico">📊</div>
+      <div class="bname" style="color:#6FA3E0">PPC Services</div>
+      <div class="bsub">Amazon PPC Management</div>
+      <div class="bamt" id="h-ppc-rev">—</div>
+      <div class="blbl">Total Income</div>
+      <div class="btn">Full Dashboard →</div>
+    </a>
+    <a class="biz-card" href="sugar-keepers.html">
+      <div class="ico">🍬</div>
+      <div class="bname" style="color:#F5C896">Sugar Keepers</div>
+      <div class="bsub">Sifri Art</div>
+      <div class="bamt" id="h-sk-rev">—</div>
+      <div class="blbl">Net Profit</div>
+      <div class="btn">Full Dashboard →</div>
+    </a>
+    <a class="biz-card" href="index.html">
+      <div class="ico">🪨</div>
+      <div class="bname" style="color:#F2A87E">Pumice Stone</div>
+      <div class="bsub">Sifri Art · Amazon FBA</div>
+      <div class="bamt" id="h-pumice-rev">—</div>
+      <div class="blbl">Net Profit</div>
+      <div class="btn">Full Dashboard →</div>
+    </a>
+    <a class="biz-card" href="rolling-grips.html">
+      <div class="ico">💪</div>
+      <div class="bname" style="color:#C8FF00">Rolling Grips</div>
+      <div class="bsub">Amazon FBA</div>
+      <div class="bamt" id="h-rg-rev">—</div>
+      <div class="blbl">Net Profit</div>
+      <div class="btn">Full Dashboard →</div>
+    </a>
+  </div>
 </div>
 
 <div class="kpis" id="kpiRow"></div>
+
+<div class="sec" style="padding-bottom:4px">
+  <div class="sec-hd">Portfolio Summary — By Revenue Stream</div>
+  <div class="sum-wrap">
+    <table class="sum">
+      <thead><tr><th style="text-align:left">Business / Category</th><th>Total (Jul 2026 – Mar 2029)</th></tr></thead>
+      <tbody id="sumBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec" style="padding-bottom:14px">
+  <div class="chart-wrap">
+    <div style="font-weight:700;font-size:12px;margin-bottom:8px">Monthly Income / Profit by Revenue Stream</div>
+    <div class="cw"><canvas id="streamChart"></canvas></div>
+  </div>
+</div>
 
 <div class="sec">
   <div class="sec-hd">Full Monthly Ledger — All Income &amp; Expenses</div>
@@ -138,9 +213,51 @@ totCells+=`<td>${$f(balance[N-1])}</td>`;
 tot.innerHTML=totCells;
 tbody.appendChild(tot);
 
+// ── PER-STREAM TOTALS ────────────────────────────────────────────────
+const totPpc     = ppc.reduce((s,v)=>s+v,0);
+const totSkRev   = sk.reduce((s,v)=>s+v,0);
+const totSkExp   = skExp.reduce((s,v)=>s+v,0);
+const totSkPrf   = totSkRev+totSkExp;
+const totPumRev  = pumice.reduce((s,v)=>s+v,0);
+const totPumExp  = pumiceExp.reduce((s,v)=>s+v,0);
+const totPumPrf  = totPumRev+totPumExp;
+const totRgRev   = rg.reduce((s,v)=>s+v,0);
+const totRgExp   = rgExp.reduce((s,v)=>s+v,0);
+const totRgPrf   = totRgRev+totRgExp;
+const totFamExp  = famExp.reduce((s,v)=>s+v,0);
+const totProperty= property.reduce((s,v)=>s+v,0);
+const totIncome  = totPpc+totSkRev+totPumRev+totRgRev;
+const totExpense = totFamExp+totSkExp+totPumExp+totRgExp+totProperty;
+const totNet     = totIncome+totExpense;
+
+document.getElementById('h-ppc-rev').textContent='$'+Math.round(totPpc/1000)+'K';
+document.getElementById('h-sk-rev').textContent='$'+Math.round(totSkPrf/1000)+'K';
+document.getElementById('h-pumice-rev').textContent='$'+Math.round(totPumPrf/1000)+'K';
+document.getElementById('h-rg-rev').textContent='$'+Math.round(totRgPrf/1000)+'K';
+
+// ── PORTFOLIO SUMMARY TABLE ──────────────────────────────────────────
+const sumBody=document.getElementById('sumBody');
+const sumRows=[
+  {label:'📊 PPC Services (income)',  tot:totPpc,     c:'var(--c-ppc)',    sub:false},
+  {label:'🍬 Sugar Keepers Revenue',  tot:totSkRev,   c:'var(--c-sk)',     sub:false},
+  {label:'  └ Net Profit',            tot:totSkPrf,   c:'var(--grn)',      sub:true},
+  {label:'🪨 Pumice Stone Revenue',   tot:totPumRev,  c:'var(--c-pumice)', sub:false},
+  {label:'  └ Net Profit',            tot:totPumPrf,  c:'var(--grn)',      sub:true},
+  {label:'💪 Rolling Grips Revenue',  tot:totRgRev,   c:'var(--c-rg)',     sub:false},
+  {label:'  └ Net Profit',            tot:totRgPrf,   c:'var(--grn)',      sub:true},
+  {label:'🏠 Family Expenses',        tot:totFamExp,  c:'var(--red)',      sub:false},
+  {label:'🏡 Property',               tot:totProperty,c:'var(--red)',      sub:false},
+  {label:'💰 TOTAL NET',              tot:totNet,     c:totNet>0?'var(--grn)':'var(--red)', sub:false, hi:true},
+];
+sumRows.forEach(r=>{
+  const tr=document.createElement('tr');
+  if(r.hi) tr.className='hi'; else if(r.sub) tr.className='sub';
+  const totCell=`<td style="font-weight:800;color:${r.tot<0?'var(--red)':r.c}">${r.tot<0?'−':'+'}${$f(Math.abs(r.tot))}</td>`;
+  tr.innerHTML=`<td style="${r.hi?'color:var(--gold);':''}">${r.label}</td>${totCell}`;
+  sumBody.appendChild(tr);
+});
+
 // ── KPIs ──────────────────────────────────────────────────────────
-const totIncome = ppc.reduce((s,v)=>s+v,0)+sk.reduce((s,v)=>s+v,0)+pumice.reduce((s,v)=>s+v,0)+rg.reduce((s,v)=>s+v,0);
-const totExpense = famExp.reduce((s,v)=>s+v,0)+skExp.reduce((s,v)=>s+v,0)+pumiceExp.reduce((s,v)=>s+v,0)+rgExp.reduce((s,v)=>s+v,0)+property.reduce((s,v)=>s+v,0);
 const kpis=[
   {l:'Starting Balance (Jul 2026)', v:$f(START_BALANCE), c:'var(--mut)'},
   {l:'Final Balance (Mar 2029)',    v:$f(balance[N-1]),  c:balance[N-1]>=0?'var(--grn)':'var(--red)'},
@@ -151,6 +268,26 @@ kpis.forEach(k=>{
   const d=document.createElement('div'); d.className='kpi';
   d.innerHTML=`<div class="l">${k.l}</div><div class="v" style="color:${k.c}">${k.v}</div>`;
   kr.appendChild(d);
+});
+
+// ── STREAM CHART ──────────────────────────────────────────────────
+const skNet=sk.map((v,i)=>v+skExp[i]);
+const pumiceNet=pumice.map((v,i)=>v+pumiceExp[i]);
+const rgNet=rg.map((v,i)=>v+rgExp[i]);
+new Chart(document.getElementById('streamChart').getContext('2d'),{
+  type:'bar',
+  data:{labels:MFL, datasets:[
+    {label:'PPC Income',            data:ppc,                backgroundColor:'rgba(46,111,219,.55)', stack:'s'},
+    {label:'Sugar Keepers Profit',  data:skNet,              backgroundColor:'rgba(200,119,34,.55)', stack:'s'},
+    {label:'Pumice Net Profit',     data:pumiceNet,          backgroundColor:'rgba(196,98,45,.55)',  stack:'s'},
+    {label:'Rolling Grips Profit',  data:rgNet,              backgroundColor:'rgba(139,181,0,.55)',  stack:'s'},
+    {label:'Family Expenses',       data:famExp,             backgroundColor:'rgba(192,57,43,.35)',  stack:'s'},
+    {label:'Property',              data:property,           backgroundColor:'rgba(142,68,173,.35)', stack:'s'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#888',font:{size:11}}}},
+    scales:{x:{stacked:true,ticks:{color:'#888',font:{size:9},maxRotation:45},grid:{color:'#EDE8E0'}},
+            y:{stacked:true,ticks:{color:'#888',callback:v=>'$'+(v/1000).toFixed(0)+'K'},grid:{color:'#EDE8E0'}}}}
 });
 
 // ── CHART ──────────────────────────────────────────────────────────
