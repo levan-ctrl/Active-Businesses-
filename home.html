@@ -10,7 +10,7 @@
   --gold:#D4A843;--grn:#2E8B57;--red:#C0392B;
   --bg:#F7F3EE;--card:#fff;--bdr:#E0D5C8;
   --txt:#2A2A2A;--mut:#6B6B6B;--nav:#1C1410;
-  --c-pumice:#C4622D;--c-ppc:#2E6FDB;--c-rg:#8BB500;--c-sk:#C87722;
+  --c-pumice:#C4622D;--c-ppc:#2E6FDB;--c-sk:#C87722;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:13px;}
@@ -23,9 +23,8 @@ nav a:hover,nav a.act{color:#fff;border-bottom-color:var(--gold);}
 .hdr h1{font-size:24px;font-weight:800;}
 .hdr h1 span{color:var(--gold);}
 .hdr p{font-size:12px;opacity:.65;margin-top:4px;margin-bottom:18px;}
-.biz-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1000px;}
-@media(max-width:800px){.biz-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:480px){.biz-grid{grid-template-columns:1fr;}}
+.biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:750px;}
+@media(max-width:700px){.biz-grid{grid-template-columns:1fr;}}
 .biz-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:16px 14px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;display:block;color:#fff;}
 .biz-card:first-child{border-radius:10px 0 0 10px;}
 .biz-card:last-child{border-radius:0 10px 10px 0;}
@@ -105,14 +104,6 @@ tr.tot td{background:var(--nav);color:#fff;font-weight:700;}
       <div class="blbl">Net Profit</div>
       <div class="btn">Full Dashboard →</div>
     </a>
-    <a class="biz-card" href="rolling-grips.html">
-      <div class="ico">💪</div>
-      <div class="bname" style="color:#C8FF00">Rolling Grips</div>
-      <div class="bsub">Amazon FBA</div>
-      <div class="bamt" id="h-rg-rev">—</div>
-      <div class="blbl">Net Profit</div>
-      <div class="btn">Full Dashboard →</div>
-    </a>
   </div>
 </div>
 
@@ -164,8 +155,7 @@ const sk       =[500,1000,1500,3500,9500,13000,6500,4500,2000,1500,1500,1000,500
 const skExp    =[0,-1000,0,0,0,-5000,0,-10000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 const pumice   =[0,0,0,2000,6000,8000,10000,12000,14000,16000,20000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000,30000];
 const pumiceExp=[-8500,0,0,-15000,0,-30000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-const rg       =[0,0,0,0,0,0,0,0,0,0,0,0,0,10000,20000,30000,40000,52000,70000,90000,100000,100000,100000,100000,100000,100000,100000,150000,200000,200000,200000,200000,200000];
-const rgExp    =[0,-1000,0,0,-5000,0,-15000,0,-15000,0,-20000,-30000,-25000,-35000,0,0,0,-100000,-200000,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+// Rolling Grips not yet launched — excluded from overview income/expenses for now
 
 const N=MFL.length;
 const $f = v=>(v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString();
@@ -173,14 +163,14 @@ const $f = v=>(v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString();
 const balance=[];
 let run=START_BALANCE;
 for(let i=0;i<N;i++){
-  run += famExp[i]+ppc[i]+sk[i]+skExp[i]+pumice[i]+pumiceExp[i]+rg[i]+rgExp[i];
+  run += famExp[i]+ppc[i]+sk[i]+skExp[i]+pumice[i]+pumiceExp[i];
   balance.push(run);
 }
 
 // ── HEADER ROW ──────────────────────────────────────────────────────
 const cols=[
   {l:'Month'},{l:'Family Exp'},{l:'PPC'},{l:'Sugar Keepers'},{l:'SK Exp'},
-  {l:'Pumice Stone'},{l:'Pumice Exp'},{l:'Rolling Grips'},{l:'RG Exp'},{l:'Balance'}
+  {l:'Pumice Stone'},{l:'Pumice Exp'},{l:'Balance'}
 ];
 const thRow=document.getElementById('thRow');
 cols.forEach((c,i)=>{
@@ -192,7 +182,7 @@ cols.forEach((c,i)=>{
 
 // ── TABLE BODY ──────────────────────────────────────────────────────
 const tbody=document.getElementById('tblBody');
-const arrs=[famExp,ppc,sk,skExp,pumice,pumiceExp,rg,rgExp];
+const arrs=[famExp,ppc,sk,skExp,pumice,pumiceExp];
 for(let i=0;i<N;i++){
   const tr=document.createElement('tr');
   let cells=`<td>${MFL[i]}</td>`;
@@ -220,18 +210,14 @@ const totSkPrf   = totSkRev+totSkExp;
 const totPumRev  = pumice.reduce((s,v)=>s+v,0);
 const totPumExp  = pumiceExp.reduce((s,v)=>s+v,0);
 const totPumPrf  = totPumRev+totPumExp;
-const totRgRev   = rg.reduce((s,v)=>s+v,0);
-const totRgExp   = rgExp.reduce((s,v)=>s+v,0);
-const totRgPrf   = totRgRev+totRgExp;
 const totFamExp  = famExp.reduce((s,v)=>s+v,0);
-const totIncome  = totPpc+totSkRev+totPumRev+totRgRev;
-const totExpense = totFamExp+totSkExp+totPumExp+totRgExp;
+const totIncome  = totPpc+totSkRev+totPumRev;
+const totExpense = totFamExp+totSkExp+totPumExp;
 const totNet     = totIncome+totExpense;
 
 document.getElementById('h-ppc-rev').textContent='$'+Math.round(totPpc/1000)+'K';
 document.getElementById('h-sk-rev').textContent='$'+Math.round(totSkPrf/1000)+'K';
 document.getElementById('h-pumice-rev').textContent='$'+Math.round(totPumPrf/1000)+'K';
-document.getElementById('h-rg-rev').textContent='$'+Math.round(totRgPrf/1000)+'K';
 
 // ── PORTFOLIO SUMMARY TABLE ──────────────────────────────────────────
 const sumBody=document.getElementById('sumBody');
@@ -241,8 +227,6 @@ const sumRows=[
   {label:'  └ Net Profit',            tot:totSkPrf,   c:'var(--grn)',      sub:true},
   {label:'🪨 Pumice Stone Revenue',   tot:totPumRev,  c:'var(--c-pumice)', sub:false},
   {label:'  └ Net Profit',            tot:totPumPrf,  c:'var(--grn)',      sub:true},
-  {label:'💪 Rolling Grips Revenue',  tot:totRgRev,   c:'var(--c-rg)',     sub:false},
-  {label:'  └ Net Profit',            tot:totRgPrf,   c:'var(--grn)',      sub:true},
   {label:'🏠 Family Expenses',        tot:totFamExp,  c:'var(--red)',      sub:false},
   {label:'💰 TOTAL NET',              tot:totNet,     c:totNet>0?'var(--grn)':'var(--red)', sub:false, hi:true},
 ];
@@ -270,14 +254,12 @@ kpis.forEach(k=>{
 // ── STREAM CHART ──────────────────────────────────────────────────
 const skNet=sk.map((v,i)=>v+skExp[i]);
 const pumiceNet=pumice.map((v,i)=>v+pumiceExp[i]);
-const rgNet=rg.map((v,i)=>v+rgExp[i]);
 new Chart(document.getElementById('streamChart').getContext('2d'),{
   type:'bar',
   data:{labels:MFL, datasets:[
     {label:'PPC Income',            data:ppc,                backgroundColor:'rgba(46,111,219,.55)', stack:'s'},
     {label:'Sugar Keepers Profit',  data:skNet,              backgroundColor:'rgba(200,119,34,.55)', stack:'s'},
     {label:'Pumice Net Profit',     data:pumiceNet,          backgroundColor:'rgba(196,98,45,.55)',  stack:'s'},
-    {label:'Rolling Grips Profit',  data:rgNet,              backgroundColor:'rgba(139,181,0,.55)',  stack:'s'},
     {label:'Family Expenses',       data:famExp,             backgroundColor:'rgba(192,57,43,.35)',  stack:'s'},
   ]},
   options:{responsive:true,maintainAspectRatio:false,
