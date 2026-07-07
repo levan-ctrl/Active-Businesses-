@@ -166,7 +166,6 @@ const pumice   =[0,0,0,2000,6000,8000,10000,12000,14000,16000,20000,30000,30000,
 const pumiceExp=[-8500,0,0,-15000,0,-30000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 const rg       =[0,0,0,0,0,0,0,0,0,0,0,0,0,10000,20000,30000,40000,52000,70000,90000,100000,100000,100000,100000,100000,100000,100000,150000,200000,200000,200000,200000,200000];
 const rgExp    =[0,-1000,0,0,-5000,0,-15000,0,-15000,0,-20000,-30000,-25000,-35000,0,0,0,-100000,-200000,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-const property =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-300000,-100000,-150000,-130000,0,-230000,0,0,0,0,0,0,0];
 
 const N=MFL.length;
 const $f = v=>(v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString();
@@ -174,14 +173,14 @@ const $f = v=>(v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString();
 const balance=[];
 let run=START_BALANCE;
 for(let i=0;i<N;i++){
-  run += famExp[i]+ppc[i]+sk[i]+skExp[i]+pumice[i]+pumiceExp[i]+rg[i]+rgExp[i]+property[i];
+  run += famExp[i]+ppc[i]+sk[i]+skExp[i]+pumice[i]+pumiceExp[i]+rg[i]+rgExp[i];
   balance.push(run);
 }
 
 // ── HEADER ROW ──────────────────────────────────────────────────────
 const cols=[
   {l:'Month'},{l:'Family Exp'},{l:'PPC'},{l:'Sugar Keepers'},{l:'SK Exp'},
-  {l:'Pumice Stone'},{l:'Pumice Exp'},{l:'Rolling Grips'},{l:'RG Exp'},{l:'Property'},{l:'Balance'}
+  {l:'Pumice Stone'},{l:'Pumice Exp'},{l:'Rolling Grips'},{l:'RG Exp'},{l:'Balance'}
 ];
 const thRow=document.getElementById('thRow');
 cols.forEach((c,i)=>{
@@ -193,7 +192,7 @@ cols.forEach((c,i)=>{
 
 // ── TABLE BODY ──────────────────────────────────────────────────────
 const tbody=document.getElementById('tblBody');
-const arrs=[famExp,ppc,sk,skExp,pumice,pumiceExp,rg,rgExp,property];
+const arrs=[famExp,ppc,sk,skExp,pumice,pumiceExp,rg,rgExp];
 for(let i=0;i<N;i++){
   const tr=document.createElement('tr');
   let cells=`<td>${MFL[i]}</td>`;
@@ -225,9 +224,8 @@ const totRgRev   = rg.reduce((s,v)=>s+v,0);
 const totRgExp   = rgExp.reduce((s,v)=>s+v,0);
 const totRgPrf   = totRgRev+totRgExp;
 const totFamExp  = famExp.reduce((s,v)=>s+v,0);
-const totProperty= property.reduce((s,v)=>s+v,0);
 const totIncome  = totPpc+totSkRev+totPumRev+totRgRev;
-const totExpense = totFamExp+totSkExp+totPumExp+totRgExp+totProperty;
+const totExpense = totFamExp+totSkExp+totPumExp+totRgExp;
 const totNet     = totIncome+totExpense;
 
 document.getElementById('h-ppc-rev').textContent='$'+Math.round(totPpc/1000)+'K';
@@ -246,7 +244,6 @@ const sumRows=[
   {label:'💪 Rolling Grips Revenue',  tot:totRgRev,   c:'var(--c-rg)',     sub:false},
   {label:'  └ Net Profit',            tot:totRgPrf,   c:'var(--grn)',      sub:true},
   {label:'🏠 Family Expenses',        tot:totFamExp,  c:'var(--red)',      sub:false},
-  {label:'🏡 Property',               tot:totProperty,c:'var(--red)',      sub:false},
   {label:'💰 TOTAL NET',              tot:totNet,     c:totNet>0?'var(--grn)':'var(--red)', sub:false, hi:true},
 ];
 sumRows.forEach(r=>{
@@ -282,7 +279,6 @@ new Chart(document.getElementById('streamChart').getContext('2d'),{
     {label:'Pumice Net Profit',     data:pumiceNet,          backgroundColor:'rgba(196,98,45,.55)',  stack:'s'},
     {label:'Rolling Grips Profit',  data:rgNet,              backgroundColor:'rgba(139,181,0,.55)',  stack:'s'},
     {label:'Family Expenses',       data:famExp,             backgroundColor:'rgba(192,57,43,.35)',  stack:'s'},
-    {label:'Property',              data:property,           backgroundColor:'rgba(142,68,173,.35)', stack:'s'},
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{labels:{color:'#888',font:{size:11}}}},
